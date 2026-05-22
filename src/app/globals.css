@@ -1,26 +1,145 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand: deep navy */
+  --color-navy-50:  #E8EDF5;
+  --color-navy-100: #C5D0E3;
+  --color-navy-200: #8FA3C3;
+  --color-navy-300: #5A75A0;
+  --color-navy-400: #324E7F;
+  --color-navy-500: #1B3A66;
+  --color-navy-600: #14305A;
+  --color-navy-700: #0F2645;
+  --color-navy-800: #0A1A2F;
+  --color-navy-900: #060F1D;
+  --color-navy-950: #03070F;
+
+  /* Brand: gold accent */
+  --color-gold-50:  #FBF4DD;
+  --color-gold-100: #F4E5B1;
+  --color-gold-200: #ECD382;
+  --color-gold-300: #E1C156;
+  --color-gold-400: #E6B954;
+  --color-gold-500: #D4A537;
+  --color-gold-600: #B5871F;
+  --color-gold-700: #8E6815;
+  --color-gold-800: #6A4D0E;
+  --color-gold-900: #463308;
+
+  /* Neutrals tuned for industrial design */
+  --color-bone-50:  #FAFAF8;
+  --color-bone-100: #F4F4F1;
+  --color-bone-200: #E5E5DF;
+  --color-bone-300: #D4D4CC;
+  --color-bone-400: #A6A69D;
+  --color-bone-500: #6B6B61;
+  --color-bone-600: #4A4A43;
+  --color-bone-700: #353530;
+  --color-bone-800: #1F1F1C;
+  --color-bone-900: #111110;
+
+  /* Surfaces */
+  --color-background: #FFFFFF;
+  --color-foreground: #0A1A2F;
+  --color-muted: #F4F4F1;
+  --color-muted-foreground: #4A4A43;
+  --color-border: #E5E5DF;
+  --color-ring: #D4A537;
+
+  /* Fonts */
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  html[dir="rtl"] {
+    font-family: var(--font-arabic);
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-gold-500);
+    color: var(--color-navy-900);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6 {
+    font-family: var(--font-arabic);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .container-wide {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    max-width: 88rem;
+  }
+  @media (min-width: 768px) {
+    .container-wide {
+      padding-inline: 2rem;
+    }
+  }
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.14;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  .gold-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 350ms var(--ease-out-expo);
+  }
+  .gold-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

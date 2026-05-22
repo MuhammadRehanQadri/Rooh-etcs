@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "etcs-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-05-21",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "vars": {
+    "CONTACT_TO_EMAIL": "info@etcs-ksa.com",
+    "CONTACT_FROM_EMAIL": "ETCS Website <noreply@etcs-ksa.com>"
+  },
+  "routes": [
+    { "pattern": "etcs-ksa.com", "custom_domain": true },
+    { "pattern": "www.etcs-ksa.com", "custom_domain": true }
+  ]
+  // RESEND_API_KEY is set via:
+  //   npx wrangler secret put RESEND_API_KEY
+}

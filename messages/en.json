@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "title": "ETCS — Expert Technical Contracting & Services",
+    "titleTemplate": "%s | ETCS",
+    "description": "Trusted provider of comprehensive contracting and industrial solutions across the Kingdom of Saudi Arabia. Where vision becomes reality.",
+    "keywords": "contracting Saudi Arabia, industrial services, coating, insulation, fabrication, fireproofing, civil construction, solar, ETCS"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "projects": "Projects",
+    "projectsOngoing": "Ongoing",
+    "projectsCompleted": "Completed",
+    "clients": "Clients",
+    "vendorApprovals": "Vendor Approvals",
+    "careers": "Careers",
+    "contact": "Contact Us",
+    "requestQuote": "Request a Quote",
+    "downloadProfile": "Download Company Profile",
+    "ariaPrimary": "Primary navigation",
+    "ariaMobile": "Open menu",
+    "ariaClose": "Close menu",
+    "switchLanguage": "Switch language"
+  },
+  "hero": {
+    "eyebrow": "Industrial & Construction Solutions · KSA",
+    "headlineStart": "Where Vision Becomes",
+    "headlineAccent": "Reality",
+    "subheadline": "Reliable contracting and industrial solutions delivered with engineering precision across the Kingdom of Saudi Arabia.",
+    "ctaPrimary": "Request a Quote",
+    "ctaSecondary": "Explore Services",
+    "scroll": "Scroll"
+  },
+  "stats": {
+    "projectsValue": "120",
+    "projectsLabel": "Projects Delivered",
+    "yearsValue": "15",
+    "yearsLabel": "Years of Excellence",
+    "clientsValue": "60",
+    "clientsLabel": "Active Clients",
+    "workforceValue": "450",
+    "workforceLabel": "Skilled Workforce"
+  },
+  "aboutPreview": {
+    "eyebrow": "About ETCS",
+    "headline": "Building Reliable Solutions for a Stronger Future",
+    "body": "EXPERT TECHNICAL CONTRACTING AND SERVICES is a trusted provider of comprehensive contracting and industrial solutions across the Kingdom of Saudi Arabia. With extensive industry expertise and a commitment to operational excellence, we deliver high-quality services that support the successful execution of projects across multiple sectors.",
+    "body2": "Our company is driven by innovation, technical expertise, and a customer-focused approach, enabling us to provide dependable solutions tailored to the evolving needs of our clients. From project planning to final delivery, we are dedicated to maintaining the highest standards of quality, safety, and efficiency.",
+    "cta": "More about us"
+  },
+  "servicesPreview": {
+    "eyebrow": "What We Do",
+    "headline": "Four divisions, one integrated promise",
+    "subheadline": "From coatings and fabrication to civil construction and solar energy — a single source for the lifecycle of your industrial asset.",
+    "cta": "All services"
+  },
+  "categories": {
+    "industrial": "Industrial Services",
+    "industrialDescription": "Coating, insulation, fabrication, fireproofing and waste management for refineries and process plants.",
+    "construction": "Construction Services",
+    "constructionDescription": "Civil construction, renovation and operation & maintenance for residential, commercial and industrial facilities.",
+    "engineering": "Engineering & Technical",
+    "engineeringDescription": "Electrical & Instrumentation, mechanical works, PEB buildings and solar energy solutions.",
+    "supply": "Supply & Support",
+    "supplyDescription": "Manpower, rental equipment and industrial material supply to keep your operations running."
+  },
+  "visionMission": {
+    "visionTitle": "Vision",
+    "visionBody": "To shape the future of contracting and industrial services in the Middle East by setting new benchmarks in innovation, reliability, and operational excellence — becoming the partner of choice for clients who value quality, trust, and long-term success.",
+    "missionTitle": "Mission",
+    "missionBody": "To deliver reliable, efficient, and value-driven solutions through a skilled workforce, advanced technical capabilities, and a strong commitment to client success. We strive to complete every project with professionalism, integrity, and uncompromising quality standards."
+  },
+  "values": {
+    "eyebrow": "Core Values",
+    "headline": "What we stand for"
+  },
+  "projectsPreview": {
+    "eyebrow": "Project Portfolio",
+    "headline": "Engineered with precision. Delivered with care.",
+    "subheadline": "A selection of recent industrial and construction engagements across the Kingdom.",
+    "viewAll": "View all projects",
+    "ongoingLabel": "Ongoing",
+    "completedLabel": "Completed"
+  },
+  "clientsPreview": {
+    "eyebrow": "Trusted by",
+    "headline": "Government, industrial and commercial clients across KSA"
+  },
+  "vendorApprovalsPreview": {
+    "eyebrow": "Vendor Approvals",
+    "headline": "Pre-qualified with leading operators",
+    "subheadline": "ETCS is registered and pre-qualified across key government and private operators in the Kingdom. Certifications and ISO documentation available on request.",
+    "cta": "See full list"
+  },
+  "contactCta": {
+    "eyebrow": "Let's build together",
+    "headline": "Have a project in mind?",
+    "subheadline": "Tell us about your requirement and our team will respond within one business day.",
+    "ctaPrimary": "Request a Quote",
+    "ctaSecondary": "Talk on WhatsApp"
+  },
+  "footer": {
+    "tagline": "Trusted contracting and industrial solutions across the Kingdom of Saudi Arabia.",
+    "company": "Company",
+    "services": "Services",
+    "contact": "Contact",
+    "social": "Follow",
+    "rights": "All rights reserved.",
+    "licensed": "Licensed in the Kingdom of Saudi Arabia.",
+    "newsletter": "Subscribe to updates",
+    "newsletterDescription": "Quarterly insight on industrial trends in the Kingdom.",
+    "subscribe": "Subscribe",
+    "email": "Email address"
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "About",
+      "title": "Building Reliable Solutions for a Stronger Future",
+      "lead": "ETCS partners with industrial operators and developers across the Kingdom of Saudi Arabia to deliver projects on time, on budget and to the highest engineering standards.",
+      "hseTitle": "HSE & Quality Policy",
+      "hseBody": "We operate to international Health, Safety, Environment and Quality standards on every site. Zero-harm is non-negotiable. Our QA/QC discipline starts before mobilisation and continues through hand-over.",
+      "leadershipTitle": "Leadership",
+      "leadershipBody": "ETCS is led by a multidisciplinary team with decades of combined experience across oil & gas, refining, power, water and infrastructure."
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "Capabilities engineered around your asset",
+      "lead": "Four integrated divisions deliver a single point of accountability across the full project lifecycle."
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "Selected projects",
+      "lead": "A view into the breadth of work ETCS delivers — across coatings, fabrication, civil construction, mechanical, electrical and instrumentation.",
+      "filterAll": "All",
+      "filterIndustrial": "Industrial",
+      "filterConstruction": "Construction",
+      "filterEngineering": "Engineering",
+      "filterSupply": "Supply",
+      "tabOngoing": "Ongoing",
+      "tabCompleted": "Completed",
+      "ongoingTitle": "Ongoing Projects",
+      "completedTitle": "Completed Projects",
+      "client": "Client",
+      "location": "Location",
+      "scope": "Scope",
+      "progress": "Progress",
+      "year": "Completed",
+      "emptyTitle": "No projects yet",
+      "emptyBody": "Project listings are being prepared. Please contact us for a tailored capability statement."
+    },
+    "clients": {
+      "eyebrow": "Clients",
+      "title": "Operators, developers, integrators",
+      "lead": "We work with public-sector entities, EPC contractors, refineries, industrial operators and commercial developers across the Kingdom.",
+      "tabsAll": "All",
+      "tabsGov": "Government",
+      "tabsPrivate": "Private",
+      "tabsIndustrial": "Industrial",
+      "tabsCommercial": "Commercial"
+    },
+    "vendorApprovals": {
+      "eyebrow": "Vendor Approvals",
+      "title": "Pre-qualified and certified",
+      "lead": "ETCS is registered and approved with leading operators in the Kingdom. Capability statements and certifications are available on request."
+    },
+    "careers": {
+      "eyebrow": "Careers",
+      "title": "Grow with a team driven by excellence",
+      "lead": "We are always looking for skilled engineers, technicians, supervisors and project managers to join our team across the Kingdom.",
+      "rolesTitle": "Current openings",
+      "applyTitle": "How to apply",
+      "applyBody": "Send your CV and cover letter to careers@etcs.sa or use the form below. Shortlisted candidates are contacted within two weeks.",
+      "noRoles": "No open roles right now — we are still happy to receive a CV for our talent pool."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Let's talk about your next project",
+      "lead": "Tell us about your requirement and our team will respond within one business day.",
+      "formTitle": "Send an inquiry",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "subject": "Subject",
+      "service": "Service of interest",
+      "message": "Message",
+      "submit": "Send inquiry",
+      "submitting": "Sending...",
+      "success": "Thank you — we have received your inquiry and will respond within one business day.",
+      "error": "Sorry, something went wrong. Please try again or email us directly at info@etcs.sa.",
+      "officeTitle": "Head office",
+      "phoneTitle": "Phone",
+      "emailTitle": "Email",
+      "hoursTitle": "Working hours",
+      "hours": "Sunday – Thursday, 8:00 – 17:00 AST",
+      "whatsapp": "Chat on WhatsApp",
+      "selectService": "Select a service",
+      "any": "General inquiry"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "body": "The page you were looking for has moved or no longer exists.",
+      "cta": "Back to home"
+    }
+  },
+  "service": {
+    "scopeTitle": "Scope & expertise",
+    "sectorsTitle": "Sectors we serve",
+    "galleryTitle": "From the field",
+    "ctaTitle": "Need a tailored proposal?",
+    "ctaBody": "Tell us about your asset and timeline. Our team scopes, prices and mobilises fast.",
+    "ctaButton": "Request a quote"
+  },
+  "common": {
+    "loading": "Loading...",
+    "learnMore": "Learn more",
+    "viewProject": "View project",
+    "callUs": "Call us",
+    "emailUs": "Email us"
+  }
+}
