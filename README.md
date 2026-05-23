@@ -4,19 +4,43 @@ Premium corporate website for **EXPERT TECHNICAL CONTRACTING AND SERVICES (ETCS)
 
 > **Where Vision Becomes Reality.**
 
-Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, and next-intl. Fully bilingual (English / Arabic with RTL), SEO-optimised, and ready to deploy on Vercel.
+Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, next-intl, and Resend. Fully bilingual (English / Arabic with RTL), SEO-optimised, and deployed to Cloudflare Workers via `@opennextjs/cloudflare`.
+
+**Live:** <https://etcs-ksa.com> · backup <https://etcs-web.rehan-code.workers.dev>
 
 ---
 
 ## What's inside
 
-- **9 pages**: Home · About · Services (with 14 dynamic service detail pages) · Ongoing Projects · Completed Projects · Clients · Vendor Approvals · Careers · Contact
-- **EN / AR with RTL**: Full structural translation via `next-intl`. Long-form copy ships in English with the architecture ready for an Arabic translator to backfill.
-- **Six restrained Framer Motion patterns**: hero word-by-word reveal · scroll-triggered card stagger · count-up stats · client logo marquee · hover micro-interactions · slow-rotating gear watermark. All respect `prefers-reduced-motion`.
-- **Asymmetric hero**: navy panel with the gold-accent headline plus a 4-stat credibility strip, paired with a refinery photograph.
-- **Production-ready inquiry capture**: contact form with React Hook Form + Zod validation, honeypot, in-memory rate-limit, Resend API delivery.
-- **SEO bake-in**: per-route `generateMetadata`, OpenGraph image at `/opengraph-image`, dynamic `sitemap.xml` with both locales, and `robots.txt`.
-- **Performance**: every image goes through `next/image` with explicit `sizes`; AVIF + WebP at build time; static pre-rendering of 53 routes including all service detail pages in both locales.
+**11 page templates** (each in `/en` and `/ar`):
+- Home (asymmetric hero · capability marquee · about preview · service grid · process band · project showcase · client marquee · vision/mission · vendor approvals · contact CTA)
+- About — editorial / manifesto layout with numbered sections, leadership grid, HSE metrics, Vision 2030 callout, reading progress bar, section-dots navigator
+- Services index + 14 dynamic service detail pages
+- 3 deep-dive case-study pages (`/projects/[slug]`) with metrics strip, narrative, scope sidebar, client quote, image gallery, and next-project navigation
+- Ongoing projects (tabs + filters)
+- Completed projects (tabs + filters)
+- Clients (tabbed groups + marquee)
+- Vendor approvals
+- Careers
+- Contact (Zod-validated form → Resend → `info@etcs-ksa.com`)
+- Bespoke 404 with industrial blueprint aesthetic
+
+**Animation patterns** (all degrade to opacity-only under `prefers-reduced-motion`):
+- Hero word-by-word reveal (`TextSplit`)
+- Ken-Burns 4-photo slideshow with cross-fade (`HeroSlideshow`)
+- Scroll-triggered staggered card reveals (`Reveal`, `StaggerGroup`, `StaggerItem`)
+- Count-up stats (`CountUp`)
+- Client logo marquee — dual rows, opposite directions (`Marquee`)
+- Editorial capability marquee — keyword strip between sections
+- Slow-rotating gear watermark (`GearWatermark`)
+- Cursor-following gold spotlight on dark sections (`CursorSpotlight`)
+- Magnetic gold CTA buttons (`Magnetic`)
+- Reading-progress bar (`ReadingProgress`)
+- Sticky section-dots navigator (`SectionDots`)
+
+**Contact form**: React Hook Form + Zod + Resend with honeypot, in-memory rate-limit (5/min/IP), and error surfacing.
+
+**SEO**: per-route `generateMetadata`, dynamic OG image generation at `/opengraph-image` (default) and `/services/[slug]/opengraph-image` (per-service), bilingual sitemap, robots.txt, alternate-locale links.
 
 ---
 
@@ -27,12 +51,13 @@ Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, 
 | Framework      | Next.js 16 (App Router, React 19)        |
 | Language       | TypeScript (strict)                      |
 | Styling        | Tailwind CSS v4 (CSS-first `@theme`)     |
-| Animation      | `motion` (Framer Motion 11)              |
-| i18n           | `next-intl` v3                           |
+| Animation      | `motion` (Framer Motion 11+)             |
+| i18n           | `next-intl` v3 (without proxy — path-routed) |
 | Forms          | React Hook Form + Zod                    |
-| Email          | Resend                                   |
+| Email          | Resend (`etcs-ksa.com` verified)         |
 | Icons          | Lucide + inline brand SVGs               |
 | Fonts          | Sora (display) · Inter (body) · IBM Plex Sans Arabic |
+| Hosting        | Cloudflare Workers + Assets via `@opennextjs/cloudflare` |
 
 ---
 
@@ -41,76 +66,105 @@ Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, 
 ```bash
 cd website
 npm install
-cp .env.local.example .env.local   # add your RESEND_API_KEY
-npm run dev
+cp .env.local.example .env.local   # add RESEND_API_KEY (optional in dev)
+npm run dev                        # http://localhost:3000 → /en
 ```
 
-Then open <http://localhost:3000>. The proxy redirects `/` to `/en`.
-
-### Production build
+### Build & deploy
 
 ```bash
-npm run build
-npm start
+npm run build              # next build (no Workers bundle)
+npm run preview            # OpenNext build + local Workers preview
+npm run deploy             # OpenNext build + wrangler deploy (production)
 ```
 
-The build generates **53 static pages** across both locales (English + Arabic) plus all 14 services × 2 locales pre-rendered.
+The production deploy:
+- Bundles a ~10 MB Worker (2.4 MB gzipped) + static assets
+- Custom-domain-routed at `etcs-ksa.com` and `www.etcs-ksa.com`
+- Generates 59 statically pre-rendered pages across both locales
 
 ---
 
-## Environment variables
+## Environment & secrets
 
-| Variable               | Required | Description                                                         |
-| ---------------------- | -------- | ------------------------------------------------------------------- |
-| `RESEND_API_KEY`       | prod     | Resend API key. Without it, the form returns a `200 OK dev-mode` and logs the payload to the server console. |
-| `CONTACT_TO_EMAIL`     | prod     | Where inquiries land (default `info@etcs.sa`).                      |
-| `CONTACT_FROM_EMAIL`   | prod     | Sender shown on the inquiry email. Must be a Resend-verified domain. |
+`.env.local.example` lists the variables. In production these are split:
 
-Without `RESEND_API_KEY` the contact form still works end-to-end on the client side — the server route just logs the payload to the console instead of sending an email. This lets you build and review the site without wiring up Resend immediately.
+| Variable               | Where it lives             | Description                                                         |
+| ---------------------- | -------------------------- | ------------------------------------------------------------------- |
+| `RESEND_API_KEY`       | Workers **secret** (encrypted) | Send-only restricted Resend key. Set with `wrangler secret put`.    |
+| `CONTACT_TO_EMAIL`     | `wrangler.jsonc` → `vars`  | Where inquiries land (default `info@etcs-ksa.com`).                 |
+| `CONTACT_FROM_EMAIL`   | `wrangler.jsonc` → `vars`  | Sender. Must be a Resend-verified domain in production.             |
+
+Without `RESEND_API_KEY` the API route accepts the submission and logs the payload to the server console — useful for local dev without an account.
+
+```bash
+echo "re_NEW_KEY" | npx wrangler secret put RESEND_API_KEY
+```
 
 ---
 
 ## Editing content
 
-All copy is in two places:
+All copy lives in two places:
 
-- **`messages/en.json` and `messages/ar.json`** — UI strings (nav, CTAs, page headings, form labels). Edit and the page re-renders.
-- **`src/content/*.ts`** — typed data modules for services, projects, clients, values, careers, vendor approvals, and stats. This is what feeds the listing pages and the dynamic service detail routes.
+- **`messages/en.json` / `messages/ar.json`** — UI strings (nav, CTAs, headings, form labels). Edit and the page re-renders.
+- **`src/content/*.ts`** — typed data modules:
+  - `services.ts` — 14 services
+  - `projects.ts` — case studies (set `featured: true` to enable the deep-dive page)
+  - `clients.ts` — client logos grouped by sector
+  - `values.ts` — 10 core values
+  - `stats.ts` — hero stat counters
+  - `careers.ts` — open roles
+  - `vendor-approvals.ts` — operators + certifications
+  - `leadership.ts` — About-page leadership grid
 
-Add a service? Append to `src/content/services.ts` — the new `/services/<slug>` page generates automatically (and the sitemap picks it up).
+Add a service → append to `services.ts`. Add a case study → set `featured: true` in `projects.ts`. The new routes auto-generate and the sitemap picks them up.
 
 ---
 
-## Folder map (the essentials)
+## Folder map
 
 ```
 website/
 ├─ public/
 │  ├─ images/
 │  │  ├─ hero/                hero-01.jpg … hero-04.jpg
-│  │  ├─ services/            one image per service (15 services)
+│  │  ├─ services/            one image per service
 │  │  ├─ projects/{ongoing,completed}/
 │  │  └─ logo/                interim raster (replace with SVG when available)
 │  └─ documents/etcs-company-profile.pdf
 ├─ src/
 │  ├─ app/
-│  │  ├─ [locale]/            all pages live here
-│  │  ├─ api/contact/         Resend route handler
+│  │  ├─ [locale]/
+│  │  │  ├─ layout.tsx        html lang/dir, fonts, Header, Footer, WhatsAppFab
+│  │  │  ├─ page.tsx          Home
+│  │  │  ├─ about/page.tsx    Editorial / manifesto About
+│  │  │  ├─ services/page.tsx · services/[slug]/page.tsx · services/[slug]/opengraph-image.tsx
+│  │  │  ├─ projects/ongoing|completed/page.tsx · projects/[slug]/page.tsx  (case studies)
+│  │  │  ├─ clients|vendor-approvals|careers|contact/page.tsx
+│  │  │  ├─ [...not-found]/page.tsx     catch-all → notFound()
+│  │  │  └─ not-found.tsx               bespoke 404
+│  │  ├─ page.tsx              root → redirect("/en")
+│  │  ├─ api/contact/route.ts  Resend handler with Zod + honeypot + rate-limit
 │  │  ├─ sitemap.ts · robots.ts · opengraph-image.tsx
-│  │  └─ globals.css          Tailwind v4 @theme tokens
+│  │  └─ globals.css           Tailwind v4 @theme tokens
 │  ├─ components/
-│  │  ├─ layout/              Header · Footer · WhatsAppFab · LocaleSwitcher · MobileMenu · Logo · SocialIcons
-│  │  ├─ sections/            Hero · ServiceCategoryGrid · ProjectShowcase · ClientMarquee · VisionMission · ValuesRibbon · VendorApprovals · ContactCta · …
-│  │  ├─ motion/              Reveal · TextSplit · CountUp · Marquee · GearWatermark
-│  │  ├─ forms/ContactForm.tsx
-│  │  └─ ui/                  Button · Input · Label · Select · Badge · Card · Tabs · Sheet · Accordion
-│  ├─ content/                services · projects · clients · values · stats · careers · vendor-approvals
-│  ├─ i18n/                   routing · navigation · request
-│  ├─ lib/                    utils · rate-limit
-│  └─ proxy.ts                next-intl locale routing (Next 16 proxy convention)
-├─ messages/                  en.json · ar.json
-├─ components.json            shadcn config
-└─ next.config.ts             next-intl plugin + image formats + turbopack root
+│  │  ├─ layout/      Header · Footer · WhatsAppFab · LocaleSwitcher · MobileMenu · Logo · SocialIcons
+│  │  ├─ sections/    Hero · HeroSlideshow · CapabilityMarquee · AboutPreview · ServiceCategoryGrid
+│  │  │              · ProcessBand · ProjectShowcase · ProjectsBoard · ClientMarquee · ClientsBoard
+│  │  │              · VisionMission · ValuesRibbon · VendorApprovals · ContactCta · NextChapter
+│  │  │              · SectionHeading · PageHero
+│  │  ├─ motion/      Reveal · TextSplit · CountUp · Marquee · GearWatermark
+│  │  │              · CursorSpotlight · MagneticButton · ReadingProgress · SectionDots
+│  │  ├─ forms/       ContactForm
+│  │  └─ ui/          Button · Input · Label · Select · Badge · Card · Tabs · Sheet · Accordion
+│  ├─ content/        services · projects · clients · values · stats · careers · vendor-approvals · leadership
+│  ├─ i18n/           routing · navigation · request
+│  └─ lib/            utils · rate-limit
+├─ messages/          en.json · ar.json
+├─ open-next.config.ts
+├─ wrangler.jsonc     Cloudflare Worker config (name, routes, vars, observability)
+└─ next.config.ts     next-intl plugin + image formats + locale-prefix redirects
 ```
 
 ---
@@ -121,34 +175,63 @@ Defined in `src/app/globals.css` as Tailwind v4 `@theme` tokens.
 
 | Token              | Hex       | Where it lives                       |
 | ------------------ | --------- | ------------------------------------ |
-| `--color-navy-900` | `#0F2645` | Primary dark surface (header, footer, hero) |
-| `--color-navy-800` | `#0A1A2F` | Deepest navy for hero gradients      |
+| `--color-navy-900` | `#0F2645` | Primary dark surface                 |
+| `--color-navy-800` | `#0A1A2F` | Deepest navy (hero gradients)        |
+| `--color-navy-700` | `#1B3A66` | Hover states                         |
 | `--color-gold-500` | `#D4A537` | Primary accent (CTAs, eyebrows)      |
 | `--color-gold-400` | `#E6B954` | Hover / highlight gold               |
 | `--color-bone-50`  | `#FAFAF8` | Page background for light sections   |
 | `--color-bone-600` | `#4A4A43` | Muted body copy                      |
 
-The display font is **Sora**, body is **Inter**, Arabic switches to **IBM Plex Sans Arabic** via `dir` on `<html>`.
+Display: **Sora**. Body: **Inter**. Arabic: **IBM Plex Sans Arabic** (auto-switched via `dir`).
+
+Use Tailwind **logical utilities everywhere** (`ps-*`, `pe-*`, `text-start`, `border-s`) — never `pl-/pr-`. The `rtl:` variant is reserved for direction-pointing icons that need to flip.
 
 ---
 
-## Known v1 deferrals
+## Cloudflare deployment
 
-- **CMS**. All content is in typed TS files. Migrate to Sanity or Payload later if the client needs to edit weekly.
-- **Long-form Arabic translation**. Nav, CTAs, page titles, form labels are fully translated. Long-form service descriptions and About narrative ship in English — replace these in `messages/ar.json` and `src/content/services.ts` when professional translations arrive.
-- **Careers ATS / file upload**. Apply links are `mailto:careers@etcs.sa` plus the contact form. Wire a proper ATS later if needed.
-- **Logo SVG**. The hero header uses a custom SVG monogram in `src/components/layout/Logo.tsx`. The client should supply a vector (AI / SVG) of the official 3D gear logo so we can swap it for crisp scaling.
+**Worker**: `etcs-web`
+**Routes**: `etcs-ksa.com` + `www.etcs-ksa.com` (custom_domain bindings)
+**Bindings**: `ASSETS` (static files), `RESEND_API_KEY` (secret), `CONTACT_TO_EMAIL` + `CONTACT_FROM_EMAIL` (vars)
+
+Architecture: `@opennextjs/cloudflare` bundles the Next.js server into a Worker, with static assets served by Workers Assets. SSR + dynamic routes run on the Worker; pre-rendered pages are served from the asset bucket. `next/image` works via the OpenNext image-optimisation worker.
+
+**Reasons for the architecture:**
+- The `proxy.ts` (formerly `middleware.ts`) is **removed** — Next.js 16 made it Node.js-only and OpenNext doesn't support that yet. Locale routing is handled by:
+  - A root `app/page.tsx` that `redirect("/en")` for `/`
+  - `next.config.ts` `redirects()` that maps bare top-level paths (`/about`, `/services`, etc.) to `/en/...`
+  - The `[locale]` segment for everything else
+- A `[locale]/[...not-found]/page.tsx` catch-all routes unmatched URLs through the bespoke `[locale]/not-found.tsx`
+
+To redeploy:
+```bash
+npm run deploy
+```
 
 ---
 
-## Verification (already passed)
+## Verification
 
-- `npm run build` → 53 static pages generated, zero TypeScript errors.
-- All routes 200 OK in both locales:
-  - `/en`, `/en/services`, `/en/services/coating-and-lining`, `/en/contact`, `/en/projects/ongoing`
-  - `/ar`, `/ar/services`, `/ar/contact`, `/ar/projects/ongoing`
-- RTL audit: `<html dir="rtl" lang="ar">` on Arabic routes; navigation, hero, cards, footer all mirror cleanly.
-- Reduced-motion: all Framer Motion sequences degrade to opacity-only when `prefers-reduced-motion: reduce` is set.
+- `npm run build` → 59 static pages, zero TypeScript errors
+- All routes 200 in both locales: `/`, `/en`, `/en/about`, `/en/services`, `/en/services/[slug]`, `/en/projects/ongoing`, `/en/projects/[slug]`, `/en/contact`, plus the AR mirror
+- `<html dir="rtl" lang="ar">` on Arabic routes; navigation, hero, cards, forms all mirror cleanly
+- 404: unmatched routes serve the bespoke `not-found.tsx` (blueprint-themed)
+- Reading-progress + section-dots active on `/about`
+- Contact form: Zod-validated, Resend delivers to `info@etcs-ksa.com`, honeypot rejects spam, 429 on burst
+- Per-page OG images render at `/{locale}/opengraph-image` and `/{locale}/services/[slug]/opengraph-image`
+
+---
+
+## Known v1 deferrals (intentional)
+
+- **CMS** — all content in typed TS files; migrate to Sanity/Payload only if the client edits weekly
+- **Long-form Arabic translation** — nav, CTAs, page titles, form labels fully translated; long-form service descriptions and About narrative ship in English (clearly marked) until a professional translator delivers
+- **Careers ATS / file upload** — apply links are `mailto:careers@etcs.sa` + the contact form
+- **Leadership portraits** — placeholder monogram tiles (`Portrait pending`) until photographs arrive
+- **Project numbers** — the random metrics in case studies are realistic placeholders; replace with real data when available
+- **Live video hero** — currently 4-image Ken-Burns slideshow; can swap a 6-second MP4 in `HeroSlideshow.tsx` when a clip is delivered
+- **Logo SVG** — header uses a custom geometric monogram in `Logo.tsx`. Replace with the official 3D gear logo (SVG) when the vector arrives
 
 ---
 
