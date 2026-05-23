@@ -37,7 +37,6 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", phone: "", company: "", service: "", subject: "", message: "", website: "" },
   });
 
   const onSubmit = async (data: FormValues) => {
@@ -50,7 +49,7 @@ export function ContactForm() {
       });
       if (!r.ok) throw new Error("send failed");
       toast.success(t("success"));
-      reset();
+      reset({ name: "", email: "", phone: "", company: "", service: "", subject: "", message: "", website: "" });
     } catch {
       toast.error(t("error"));
     } finally {

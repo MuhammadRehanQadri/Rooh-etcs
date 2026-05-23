@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
+import { caseStudies } from "@/content/projects";
 import { routing } from "@/i18n/routing";
 
 const BASE = "https://etcs-ksa.com";
@@ -37,6 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const s of services) {
       entries.push({
         url: `${BASE}/${locale}/services/${s.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+    }
+    for (const p of caseStudies) {
+      entries.push({
+        url: `${BASE}/${locale}/projects/${p.slug}`,
         lastModified: now,
         changeFrequency: "monthly",
         priority: 0.6,

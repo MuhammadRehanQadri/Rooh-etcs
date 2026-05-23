@@ -99,7 +99,7 @@ export default async function ServiceDetailPage({
 
       {/* Scope + Sectors */}
       <section className="bg-white py-24 lg:py-32">
-        <div className="container-wide grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="container-wide grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
           <div className="lg:col-span-7">
             <Reveal>
               <Badge variant="eyebrow">{t("scopeTitle")}</Badge>
@@ -121,7 +121,7 @@ export default async function ServiceDetailPage({
             </StaggerGroup>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 lg:sticky lg:top-32">
             <Reveal>
               <Badge variant="eyebrow">{t("sectorsTitle")}</Badge>
             </Reveal>

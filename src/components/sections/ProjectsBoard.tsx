@@ -4,11 +4,12 @@ import * as React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { Project } from "@/content/projects";
+import { Link } from "@/i18n/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { MapPinIcon } from "lucide-react";
+import { MapPinIcon, ArrowUpRightIcon } from "lucide-react";
 
 const filters = [
   { key: "all", value: "all" },
@@ -107,8 +108,8 @@ function ProjectGrid({ items }: { items: Project[] }) {
 
 function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations("pages.projects");
-  return (
-    <article className="group relative h-full overflow-hidden rounded-2xl bg-navy-900 ring-1 ring-bone-200">
+  const content = (
+    <>
       <div className="relative aspect-[4/3]">
         <Image
           src={project.image}
@@ -119,6 +120,11 @@ function ProjectCard({ project }: { project: Project }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-900/30 to-transparent" />
       </div>
+      {project.featured && (
+        <div className="absolute top-4 end-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white/85 transition group-hover:bg-gold-500 group-hover:text-navy-900">
+          <ArrowUpRightIcon className="size-4 rtl:rotate-90" />
+        </div>
+      )}
       <div className="absolute inset-x-0 bottom-0 p-6 text-white">
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] mb-3">
           <span className={`size-1.5 rounded-full ${project.status === "ongoing" ? "bg-gold-500 animate-pulse" : "bg-white/70"}`} />
@@ -141,6 +147,21 @@ function ProjectCard({ project }: { project: Project }) {
           {project.year && <span>{project.year}</span>}
         </div>
       </div>
+    </>
+  );
+  if (project.featured) {
+    return (
+      <Link
+        href={`/projects/${project.slug}` as never}
+        className="group relative block h-full overflow-hidden rounded-2xl bg-navy-900 ring-1 ring-bone-200"
+      >
+        {content}
+      </Link>
+    );
+  }
+  return (
+    <article className="group relative h-full overflow-hidden rounded-2xl bg-navy-900 ring-1 ring-bone-200">
+      {content}
     </article>
   );
 }

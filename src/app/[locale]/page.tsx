@@ -1,8 +1,10 @@
 import { setRequestLocale } from "next-intl/server";
 import { Toaster } from "sonner";
 import { Hero } from "@/components/sections/Hero";
+import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { AboutPreview } from "@/components/sections/AboutPreview";
 import { ServiceCategoryGrid } from "@/components/sections/ServiceCategoryGrid";
+import { ProcessBand } from "@/components/sections/ProcessBand";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
 import { ClientMarquee } from "@/components/sections/ClientMarquee";
 import { VisionMission } from "@/components/sections/VisionMission";
@@ -21,8 +23,10 @@ export default async function HomePage({
     <>
       <Toaster richColors position="top-center" closeButton />
       <Hero />
+      <CapabilityMarquee />
       <AboutPreview />
       <ServiceCategoryGrid />
+      <ProcessBand />
       <ProjectShowcase />
       <ClientMarquee />
       <section className="bg-navy-900 text-white relative isolate overflow-hidden py-24 lg:py-32">
