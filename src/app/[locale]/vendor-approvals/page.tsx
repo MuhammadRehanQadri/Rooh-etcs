@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StaggerGroup, StaggerItem, Reveal } from "@/components/motion/Reveal";
 import { CheckCircle2Icon, ShieldCheckIcon, HandshakeIcon, DownloadIcon } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, graph, pageMetadata, webPageSchema } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -15,7 +17,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.vendorApprovals" });
-  return { title: t("title") };
+  return pageMetadata({
+    locale,
+    path: "/vendor-approvals",
+    title: t("metaTitle"),
+    description: t("description"),
+    keywords: [
+      "ISO 9001:2015",
+      "ISO 14001:2015",
+      "ISO 45001:2018",
+      "vendor pre-qualification Saudi Arabia",
+    ],
+  });
 }
 
 export default async function VendorApprovalsPage({
@@ -31,19 +44,34 @@ export default async function VendorApprovalsPage({
   const operators = vendorApprovals.filter((v) => v.type === "operator");
   const certifications = vendorApprovals.filter((v) => v.type === "certification");
 
+  const jsonLd = graph(
+    webPageSchema({
+      locale,
+      path: "/vendor-approvals",
+      name: t("title"),
+      description: t("description"),
+      hasBreadcrumb: true,
+    }),
+    breadcrumbSchema(locale, [
+      { name: tNav("home"), path: "" },
+      { name: tNav("vendorApprovals"), path: "/vendor-approvals" },
+    ])
+  );
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <PageHero eyebrow={t("eyebrow")} title={t("title")} lead={t("lead")} />
 
       <section className="bg-white py-24 lg:py-32">
         <div className="container-wide grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <Badge variant="eyebrow">Approved by</Badge>
+              <Badge variant="eyebrow">Operator pre-qualification</Badge>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-4 mb-10 font-display text-3xl lg:text-4xl font-semibold text-navy-900 leading-tight">
-                Operators & client approvals
+                Pre-qualification underway
               </h2>
             </Reveal>
             <StaggerGroup className="grid gap-3 sm:grid-cols-2" stagger={0.05}>
@@ -55,9 +83,10 @@ export default async function VendorApprovalsPage({
                     </div>
                     <div>
                       <p className="text-sm font-medium text-navy-900">{v.name}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.16em] text-bone-500">
-                        Pre-qualified vendor
-                      </p>
+                      <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-gold-500/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold-700">
+                        <span className="size-1.5 rounded-full bg-gold-500 animate-pulse" />
+                        In progress
+                      </span>
                     </div>
                   </div>
                 </StaggerItem>
@@ -85,6 +114,18 @@ export default async function VendorApprovalsPage({
                       <p className="text-sm font-medium">{c.name}</p>
                       {c.detail && (
                         <p className="mt-1 text-xs text-white/65">{c.detail}</p>
+                      )}
+                      {c.certNo && (
+                        <p className="mt-2 text-[11px] text-gold-400 tabular-nums">
+                          Cert {c.certNo}
+                          {c.validTo ? ` · valid to ${c.validTo}` : ""}
+                        </p>
+                      )}
+                      {!c.certNo && c.status === "in-progress" && (
+                        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-gold-500/15 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold-400">
+                          <span className="size-1.5 rounded-full bg-gold-400 animate-pulse" />
+                          In progress
+                        </span>
                       )}
                     </div>
                   </div>

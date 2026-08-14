@@ -48,6 +48,17 @@ export function VendorApprovals() {
                   {v.detail && (
                     <p className="mt-1 text-xs text-bone-600">{v.detail}</p>
                   )}
+                  {v.status === "in-progress" && (
+                    <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-gold-500/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold-700">
+                      <span className="size-1.5 rounded-full bg-gold-500 animate-pulse" />
+                      In progress
+                    </span>
+                  )}
+                  {v.certNo && (
+                    <p className="mt-1 text-[11px] text-bone-500 tabular-nums">
+                      Cert {v.certNo}
+                    </p>
+                  )}
                 </div>
               </div>
             </StaggerItem>

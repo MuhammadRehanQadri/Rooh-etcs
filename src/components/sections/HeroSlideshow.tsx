@@ -10,27 +10,27 @@ type Slide = { src: string; alt: string; caption?: string; location?: string };
 const SLIDES: Slide[] = [
   {
     src: "/images/hero/hero-01.jpg",
-    alt: "Refinery storage tank coating program",
-    caption: "Refinery coating program — 12 tanks, in progress",
-    location: "Jubail",
+    alt: "Industrial contracting work on site",
+    caption: "Industrial contracting & technical services",
+    location: "Kingdom of Saudi Arabia",
   },
   {
     src: "/images/hero/hero-03.jpg",
-    alt: "Industrial scaffolding and cladding fabrication",
-    caption: "Insulation & cladding works — petrochemical unit",
-    location: "Rabigh",
+    alt: "Insulation and cladding works",
+    caption: "Insulation, cladding & surface protection",
+    location: "Field operations",
   },
   {
     src: "/images/hero/hero-04.jpg",
-    alt: "Heavy fabrication column lift",
-    caption: "API column lift — fabrication yard",
-    location: "Jazan",
+    alt: "Fabrication and steel works",
+    caption: "Fabrication, piping & structural steel",
+    location: "Fabrication & site works",
   },
   {
     src: "/images/hero/hero-02.jpg",
-    alt: "Field crew with piping",
-    caption: "Field crew — shutdown campaign",
-    location: "Yanbu",
+    alt: "Skilled field crew",
+    caption: "Skilled workforce & quality execution",
+    location: "On site",
   },
 ];
 

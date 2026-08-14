@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "title": "ETCS — Expert Technical Contracting & Services",
+    "title": "ETCS — Technical Contracting & Industrial Services, Saudi Arabia",
     "titleTemplate": "%s | ETCS",
-    "description": "Trusted provider of comprehensive contracting and industrial solutions across the Kingdom of Saudi Arabia. Where vision becomes reality.",
-    "keywords": "contracting Saudi Arabia, industrial services, coating, insulation, fabrication, fireproofing, civil construction, solar, ETCS"
+    "description": "ETCS is a Saudi technical contracting company in Al Jubail delivering industrial coating, insulation, fireproofing, piping, civil and E&I works across KSA.",
+    "keywords": "technical contracting Saudi Arabia, industrial services Al Jubail, coating and lining, insulation and cladding, refractory, fireproofing, piping and fabrication, civil construction, electrical and instrumentation, solar energy, manpower supply, ETCS"
   },
   "nav": {
     "home": "Home",
@@ -33,14 +33,10 @@
     "scroll": "Scroll"
   },
   "stats": {
-    "projectsValue": "120",
-    "projectsLabel": "Projects Delivered",
-    "yearsValue": "15",
-    "yearsLabel": "Years of Excellence",
-    "clientsValue": "60",
-    "clientsLabel": "Active Clients",
-    "workforceValue": "450",
-    "workforceLabel": "Skilled Workforce"
+    "solutions": "End-to-End Solutions",
+    "experience": "Years Combined Experience",
+    "approach": "Client-Focused Approach",
+    "team": "Growing Expert Team"
   },
   "aboutPreview": {
     "eyebrow": "About ETCS",
@@ -57,13 +53,13 @@
   },
   "categories": {
     "industrial": "Industrial Services",
-    "industrialDescription": "Coating, insulation, fabrication, fireproofing and waste management for refineries and process plants.",
+    "industrialDescription": "Coating, insulation, refractory, fireproofing, passive fire protection, fabrication and waste management for refineries and process plants.",
     "construction": "Construction Services",
     "constructionDescription": "Civil construction, renovation and operation & maintenance for residential, commercial and industrial facilities.",
     "engineering": "Engineering & Technical",
-    "engineeringDescription": "Electrical & Instrumentation, mechanical works, PEB buildings and solar energy solutions.",
+    "engineeringDescription": "Electrical & Instrumentation, mechanical works, inspection, PEB buildings and solar energy solutions.",
     "supply": "Supply & Support",
-    "supplyDescription": "Manpower, rental equipment and industrial material supply to keep your operations running."
+    "supplyDescription": "Manpower, training, rental equipment and industrial material supply to keep your operations running."
   },
   "visionMission": {
     "visionTitle": "Vision",
@@ -76,22 +72,22 @@
     "headline": "What we stand for"
   },
   "projectsPreview": {
-    "eyebrow": "Project Portfolio",
-    "headline": "Engineered with precision. Delivered with care.",
-    "subheadline": "A selection of recent industrial and construction engagements across the Kingdom.",
-    "viewAll": "View all projects",
+    "eyebrow": "Our Work",
+    "headline": "Capability shown in the field.",
+    "subheadline": "A look at the disciplines ETCS delivers — coatings, insulation, fabrication, civil, inspection and more.",
+    "viewAll": "View our work",
     "ongoingLabel": "Ongoing",
     "completedLabel": "Completed"
   },
   "clientsPreview": {
-    "eyebrow": "Trusted by",
-    "headline": "Government, industrial and commercial clients across KSA"
+    "eyebrow": "Sectors We Serve",
+    "headline": "Built to support industry across the Kingdom"
   },
   "vendorApprovalsPreview": {
-    "eyebrow": "Vendor Approvals",
-    "headline": "Pre-qualified with leading operators",
-    "subheadline": "ETCS is registered and pre-qualified across key government and private operators in the Kingdom. Certifications and ISO documentation available on request.",
-    "cta": "See full list"
+    "eyebrow": "Approvals & Certifications",
+    "headline": "Certified systems, operator pre-qualification underway",
+    "subheadline": "ETCS holds ISO 9001, 14001 and 45001 certification and is actively pursuing pre-qualification with leading operators in the Kingdom.",
+    "cta": "See details"
   },
   "contactCta": {
     "eyebrow": "Let's build together",
@@ -117,66 +113,68 @@
     "about": {
       "eyebrow": "About",
       "title": "Building Reliable Solutions for a Stronger Future",
+      "metaTitle": "About ETCS — Contracting Company in Al Jubail",
       "lead": "ETCS partners with industrial operators and developers across the Kingdom of Saudi Arabia to deliver projects on time, on budget and to the highest engineering standards.",
-      "hseTitle": "HSE & Quality Policy",
-      "hseBody": "We operate to international Health, Safety, Environment and Quality standards on every site. Zero-harm is non-negotiable. Our QA/QC discipline starts before mobilisation and continues through hand-over.",
+      "description": "Learn about ETCS — an ISO 9001, ISO 14001 and ISO 45001 certified technical contracting company based in Al Jubail, Saudi Arabia, and the team behind it.",
+      "hseTitle": "Quality & HSE Policy",
+      "hseBody": "ETCS is committed to delivering the highest standards of Quality, Health, Safety, and Environmental excellence across all operations. Our integrated QA/QC and HSE practices are aligned with international industry standards, ensuring consistent project quality, regulatory compliance, and safe working environments from planning through final delivery.",
       "leadershipTitle": "Leadership",
-      "leadershipBody": "ETCS is led by a multidisciplinary team with decades of combined experience across oil & gas, refining, power, water and infrastructure."
+      "leadershipBody": "ETCS is led by a multidisciplinary team spanning operations, technical support, QHSE and project delivery across industrial and construction disciplines."
     },
     "services": {
       "eyebrow": "Services",
       "title": "Capabilities engineered around your asset",
-      "lead": "Four integrated divisions deliver a single point of accountability across the full project lifecycle."
+      "metaTitle": "Services — Industrial & Construction Contracting",
+      "lead": "Four integrated divisions deliver a single point of accountability across the full project lifecycle.",
+      "description": "Industrial and construction services from ETCS across Saudi Arabia: coating, insulation, refractory, fireproofing, piping, civil, E&I, solar and supply."
     },
     "projects": {
-      "eyebrow": "Projects",
-      "title": "Selected projects",
-      "lead": "A view into the breadth of work ETCS delivers — across coatings, fabrication, civil construction, mechanical, electrical and instrumentation.",
+      "eyebrow": "Our Work",
+      "title": "Our work across disciplines",
+      "metaTitle": "Our Work — Industrial & Construction Disciplines",
+      "lead": "A look at the breadth of work ETCS delivers — coatings, insulation, refractory, fabrication, civil construction, inspection, training and more. Filter by discipline below.",
+      "description": "See ETCS field work across disciplines — coating and lining, insulation, refractory, civil construction, fabrication, inspection and training in Saudi Arabia.",
       "filterAll": "All",
       "filterIndustrial": "Industrial",
       "filterConstruction": "Construction",
       "filterEngineering": "Engineering",
       "filterSupply": "Supply",
-      "tabOngoing": "Ongoing",
-      "tabCompleted": "Completed",
-      "ongoingTitle": "Ongoing Projects",
-      "completedTitle": "Completed Projects",
-      "client": "Client",
-      "location": "Location",
-      "scope": "Scope",
-      "progress": "Progress",
-      "year": "Completed",
-      "emptyTitle": "No projects yet",
-      "emptyBody": "Project listings are being prepared. Please contact us for a tailored capability statement."
+      "emptyTitle": "Nothing here yet",
+      "emptyBody": "Work in this discipline is being added. Please contact us for a tailored capability statement.",
+      "viewService": "View service"
     },
     "clients": {
-      "eyebrow": "Clients",
-      "title": "Operators, developers, integrators",
-      "lead": "We work with public-sector entities, EPC contractors, refineries, industrial operators and commercial developers across the Kingdom.",
-      "tabsAll": "All",
-      "tabsGov": "Government",
-      "tabsPrivate": "Private",
-      "tabsIndustrial": "Industrial",
-      "tabsCommercial": "Commercial"
+      "eyebrow": "Industries & Sectors",
+      "title": "Industries & sectors we support",
+      "metaTitle": "Industries & Sectors We Serve in Saudi Arabia",
+      "lead": "ETCS delivers technical contracting and industrial solutions across government, industrial, private and commercial sectors throughout the Kingdom.",
+      "description": "ETCS serves government, industrial, private and commercial sectors across Saudi Arabia — oil and gas, petrochemical, power, water and infrastructure."
     },
     "vendorApprovals": {
-      "eyebrow": "Vendor Approvals",
-      "title": "Pre-qualified and certified",
-      "lead": "ETCS is registered and approved with leading operators in the Kingdom. Capability statements and certifications are available on request."
+      "eyebrow": "Approvals & Certifications",
+      "title": "Certified and progressing toward operator pre-qualification",
+      "metaTitle": "ISO Certifications & Vendor Approvals",
+      "lead": "ETCS holds ISO 9001, 14001 and 45001 certification and is actively pursuing vendor pre-qualification with leading operators in the Kingdom. Certificates are available on request.",
+      "description": "ETCS holds ISO 9001:2015, ISO 14001:2015 and ISO 45001:2018 certification and is progressing operator pre-qualification with major Saudi operators."
     },
     "careers": {
       "eyebrow": "Careers",
       "title": "Grow with a team driven by excellence",
-      "lead": "We are always looking for skilled engineers, technicians, supervisors and project managers to join our team across the Kingdom.",
+      "metaTitle": "Careers at ETCS — Jobs in Saudi Arabia",
+      "lead": "Explore career opportunities and grow with a team driven by excellence and innovation.",
+      "description": "Careers at ETCS in Saudi Arabia. Send your CV to hr@etcs-ksa.com to join a technical contracting team across industrial, construction and engineering work.",
       "rolesTitle": "Current openings",
       "applyTitle": "How to apply",
-      "applyBody": "Send your CV and cover letter to careers@etcs.sa or use the form below. Shortlisted candidates are contacted within two weeks.",
-      "noRoles": "No open roles right now — we are still happy to receive a CV for our talent pool."
+      "applyBody": "Send your CV to hr@etcs-ksa.com or use the form below. Shortlisted candidates are contacted as opportunities arise.",
+      "noRoles": "No open roles right now — we are still happy to receive a CV for our talent pool.",
+      "speculativeCta": "Send your CV"
     },
     "contact": {
       "eyebrow": "Contact",
       "title": "Let's talk about your next project",
+      "metaTitle": "Contact ETCS — Al Jubail, Saudi Arabia",
       "lead": "Tell us about your requirement and our team will respond within one business day.",
+      "description": "Contact ETCS in Al Jubail, Saudi Arabia. Call +966 59 051 7642, email info@etcs-ksa.com or send an inquiry — we reply within one business day.",
       "formTitle": "Send an inquiry",
       "name": "Full name",
       "email": "Email",
@@ -188,15 +186,31 @@
       "submit": "Send inquiry",
       "submitting": "Sending...",
       "success": "Thank you — we have received your inquiry and will respond within one business day.",
-      "error": "Sorry, something went wrong. Please try again or email us directly at info@etcs.sa.",
+      "error": "Sorry, something went wrong. Please try again or email us directly at info@etcs-ksa.com.",
       "officeTitle": "Head office",
       "phoneTitle": "Phone",
       "emailTitle": "Email",
       "hoursTitle": "Working hours",
-      "hours": "Sunday – Thursday, 8:00 – 17:00 AST",
+      "hours": "Saturday – Thursday: 7:00 AM – 6:00 PM · Friday: Closed",
       "whatsapp": "Chat on WhatsApp",
       "selectService": "Select a service",
-      "any": "General inquiry"
+      "any": "General inquiry",
+      "faqEyebrow": "Before you write",
+      "faqTitle": "Frequently asked questions",
+      "faq": {
+        "q1": "Where is ETCS located?",
+        "a1": "ETCS is based in the Dana District on Omar Bin Abdul Aziz Street in Al Jubail, Eastern Province, Kingdom of Saudi Arabia (P.O. Box 35514). We take on work with clients across the Kingdom.",
+        "q2": "What services does ETCS provide?",
+        "a2": "ETCS works across four divisions: industrial services (coating and lining, insulation and cladding, refractory, fireproofing, passive fire protection, piping and fabrication, waste management), construction (civil construction, renovation and maintenance, operation and maintenance), engineering (electrical and instrumentation, mechanical works, pre-engineered buildings, solar energy, inspection) and supply (manpower, training, equipment rental, industrial materials).",
+        "q3": "Is ETCS certified?",
+        "a3": "Yes. ETCS holds ISO 9001:2015 (Quality), ISO 14001:2015 (Environment) and ISO 45001:2018 (Occupational Health & Safety) certification, valid to 21 May 2029. Certificates are available on request. Vendor pre-qualification with major operators is currently in progress.",
+        "q4": "Which sectors does ETCS work with?",
+        "a4": "ETCS supports government, industrial, private and commercial clients — including oil and gas, refining and petrochemical, power, water, storage and terminals, and infrastructure projects.",
+        "q5": "How do I request a quotation?",
+        "a5": "Send your scope through the inquiry form on this page, email info@etcs-ksa.com or sales@etcs-ksa.com, call +966 59 051 7642, or message us on WhatsApp. Our team responds within one business day.",
+        "q6": "What are your working hours?",
+        "a6": "Saturday to Thursday, 7:00 AM to 6:00 PM Arabia Standard Time. We are closed on Fridays. Email and WhatsApp messages sent outside those hours are answered the next business day."
+      }
     },
     "notFound": {
       "title": "Page not found",
@@ -217,6 +231,7 @@
     "learnMore": "Learn more",
     "viewProject": "View project",
     "callUs": "Call us",
-    "emailUs": "Email us"
+    "emailUs": "Email us",
+    "skipToContent": "Skip to content"
   }
 }

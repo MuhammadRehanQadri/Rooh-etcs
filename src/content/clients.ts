@@ -1,36 +1,46 @@
-export type ClientGroup = "government" | "private" | "industrial" | "commercial";
+/**
+ * Rev 01 — ETCS is newly established and is NOT authorised to display client
+ * names or logos (legal + credibility risk per the client's checklist).
+ * The Clients page therefore presents the SECTORS ETCS serves, each with a
+ * single supporting line — no company names or implied contracts.
+ */
+export type SectorKey = "government" | "industrial" | "private" | "commercial";
 
-export type Client = {
-  name: string;
-  group: ClientGroup;
-  logo?: string;
+export type Sector = {
+  key: SectorKey;
+  title: string;
+  description: string;
+  /** lucide-react icon name */
+  icon: string;
 };
 
-export const clients: Client[] = [
-  { name: "Saudi Aramco", group: "government" },
-  { name: "SABIC", group: "government" },
-  { name: "Royal Commission for Jubail & Yanbu", group: "government" },
-  { name: "Ministry of Industry & Mineral Resources", group: "government" },
-  { name: "Saudi Electricity Company", group: "government" },
-  { name: "Marafiq", group: "government" },
-
-  { name: "Petro Rabigh", group: "industrial" },
-  { name: "SATORP", group: "industrial" },
-  { name: "Yanbu Aramco Sinopec Refining", group: "industrial" },
-  { name: "Jubail United Petrochemical", group: "industrial" },
-  { name: "Tasnee", group: "industrial" },
-  { name: "Yanbu National Petrochemical", group: "industrial" },
-
-  { name: "ACWA Power", group: "private" },
-  { name: "Olayan Group", group: "private" },
-  { name: "Bin Laden Group", group: "private" },
-  { name: "Mada'in", group: "private" },
-  { name: "Zamil Industrial", group: "private" },
-
-  { name: "Riyadh Commercial Tower Operators", group: "commercial" },
-  { name: "King Abdullah Economic City Developers", group: "commercial" },
-  { name: "Roshn Group", group: "commercial" },
-  { name: "Diriyah Gate Development Authority", group: "commercial" },
+export const sectors: Sector[] = [
+  {
+    key: "government",
+    title: "Government / Public Sector",
+    description:
+      "Supporting infrastructure, utilities, and national development initiatives across the Kingdom.",
+    icon: "Landmark",
+  },
+  {
+    key: "industrial",
+    title: "Industrial / Refining / Petrochemical",
+    description:
+      "Providing technical contracting solutions for industrial facilities, energy, and process-related operations.",
+    icon: "Factory",
+  },
+  {
+    key: "private",
+    title: "Private Sector",
+    description:
+      "Delivering reliable engineering and contracting services tailored to private-sector project requirements.",
+    icon: "Building2",
+  },
+  {
+    key: "commercial",
+    title: "Commercial / Developers",
+    description:
+      "Supporting commercial developments through quality-focused construction and technical solutions.",
+    icon: "Store",
+  },
 ];
-
-export const clientGroups: ClientGroup[] = ["government", "industrial", "private", "commercial"];

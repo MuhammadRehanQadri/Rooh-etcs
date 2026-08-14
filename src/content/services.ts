@@ -101,6 +101,42 @@ export const services: Service[] = [
     heroImage: "/images/services/fireproofing-01.jpg",
   },
   {
+    slug: "refractory",
+    category: "industrial",
+    title: "Refractory",
+    shortDescription:
+      "Advanced refractory systems engineered for high-temperature, high-demand industrial service.",
+    description:
+      "Advanced refractory solutions engineered for high-temperature and demanding industrial applications, delivering superior durability, operational reliability, and thermal efficiency. ETCS installs, repairs and maintains refractory linings for furnaces, boilers, kilns, and process equipment.",
+    scope: [
+      "Castable, gunning and shotcrete refractory installation",
+      "Brick and tile lining works",
+      "Ceramic fibre and insulation linings",
+      "Refractory repair, dry-out and maintenance",
+      "Inspection and material selection support",
+    ],
+    sectors: ["Refining", "Petrochemical", "Power Generation", "Cement & Steel"],
+    heroImage: "/images/services/refractory-01.jpg",
+  },
+  {
+    slug: "passive-fire-protection",
+    category: "industrial",
+    title: "Passive Fire Protection",
+    shortDescription:
+      "PFP systems that protect critical infrastructure against fire exposure and structural risk.",
+    description:
+      "Passive fire protection systems designed to protect critical infrastructure against fire exposure, helping clients maintain safety standards while minimizing operational and structural risks. ETCS delivers certified PFP application across structures, vessels and supports.",
+    scope: [
+      "Intumescent and cementitious PFP application",
+      "Structural steel and vessel fire protection",
+      "Hydrocarbon (jet-fire) rated systems",
+      "Surface preparation and mesh reinforcement",
+      "Inspection, DFT verification and rectification",
+    ],
+    sectors: ["Oil & Gas", "Refining", "Petrochemical", "Industrial Facilities"],
+    heroImage: "/images/services/passive-fire-protection-01.jpg",
+  },
+  {
     slug: "waste-management",
     category: "industrial",
     title: "Waste Management",
@@ -248,6 +284,24 @@ export const services: Service[] = [
     sectors: ["Commercial", "Industrial", "Government", "Renewables"],
     heroImage: "/images/services/solar-01.jpg",
   },
+  {
+    slug: "inspection-services",
+    category: "engineering",
+    title: "Inspection Services",
+    shortDescription:
+      "Independent inspection of civil, mechanical and fabrication works against quality and safety specs.",
+    description:
+      "Inspection services for civil, mechanical, and fabrication works to ensure compliance with quality, safety, and project specifications — covering structural works, piping systems, welding, mechanical equipment, and construction materials. ETCS provides qualified inspectors and audit-ready documentation.",
+    scope: [
+      "Welding and NDT inspection (visual, RT, UT, MT, PT)",
+      "Coating and DFT inspection (NACE/SSPC)",
+      "Civil and structural works inspection",
+      "Piping and mechanical equipment verification",
+      "Material receiving inspection and reporting",
+    ],
+    sectors: ["Oil & Gas", "Fabrication Yards", "Construction", "Industrial Plants"],
+    heroImage: "/images/services/inspection-services-01.jpg",
+  },
 
   /* ───────── Supply & Support ───────── */
   {
@@ -267,6 +321,24 @@ export const services: Service[] = [
     ],
     sectors: ["Shutdowns & Turnarounds", "Construction", "Plant Operations", "Industrial"],
     heroImage: "/images/services/manpower-01.jpg",
+  },
+  {
+    slug: "training-services",
+    category: "supply",
+    title: "Training Services",
+    shortDescription:
+      "Industrial training that builds workforce competency, safety and certified technical skill.",
+    description:
+      "Professional industrial training focused on workforce competency, safety, and technical skill development — abrasive blasters, coating applicators, quality inspectors, safety officers, welders, electricians, plumbers, and other skilled trades, aligned with international standards and industry best practice.",
+    scope: [
+      "Abrasive blaster & coating applicator training",
+      "Welder and fabricator qualification",
+      "Quality inspector & welding inspection training",
+      "Safety officer and HSE awareness programs",
+      "Electrical, plumbing and skilled-trade development",
+    ],
+    sectors: ["Oil & Gas", "Construction", "Industrial Plants", "Fabrication Yards"],
+    heroImage: "/images/services/training-services-01.jpg",
   },
   {
     slug: "rental-equipment",
@@ -293,7 +365,7 @@ export const services: Service[] = [
     shortDescription:
       "Procurement and logistics for industrial materials, tools and project equipment.",
     description:
-      "Trusted industrial material supply solutions ensuring timely delivery of high-quality materials, tools, and project equipment. Expertise includes procurement, logistics support, industrial tools, and construction material supply for industrial, commercial, and infrastructure sectors.",
+      "ETCS supplies quality materials for civil, mechanical, industrial, and general building projects — construction materials, piping components, structural steel, fabrication consumables, and safety equipment — with timely and reliable delivery support across the Kingdom.",
     scope: [
       "Pipe, fittings and valves",
       "Electrical and instrumentation consumables",

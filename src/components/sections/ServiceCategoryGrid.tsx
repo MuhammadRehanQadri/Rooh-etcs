@@ -10,35 +10,33 @@ import {
   ArrowUpRightIcon,
 } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { Tilt } from "@/components/motion/Tilt";
 import { SectionHeading } from "./SectionHeading";
 import { cn } from "@/lib/utils";
+import { getServicesByCategory, type ServiceCategory } from "@/content/services";
 
 const categoryMeta = [
   {
     slug: "industrial",
     icon: HardHatIcon,
-    countKey: "5",
     accent: "from-gold-500/20 to-transparent",
     tone: "industrial",
   },
   {
     slug: "construction",
     icon: HammerIcon,
-    countKey: "3",
     accent: "from-navy-500/20 to-transparent",
     tone: "construction",
   },
   {
     slug: "engineering",
     icon: CpuIcon,
-    countKey: "4",
     accent: "from-gold-400/20 to-transparent",
     tone: "engineering",
   },
   {
     slug: "supply",
     icon: TruckIcon,
-    countKey: "3",
     accent: "from-navy-400/20 to-transparent",
     tone: "supply",
   },
@@ -73,6 +71,7 @@ export function ServiceCategoryGrid({ dark = false }: { dark?: boolean }) {
             const Icon = meta.icon;
             return (
               <StaggerItem key={meta.slug}>
+                <Tilt className="h-full">
                 <Link
                   href={{ pathname: "/services", hash: meta.slug } as never}
                   className={cn(
@@ -115,10 +114,11 @@ export function ServiceCategoryGrid({ dark = false }: { dark?: boolean }) {
                       "mt-6 pt-6 text-[11px] uppercase tracking-[0.18em] border-t",
                       dark ? "border-white/10 text-gold-400" : "border-bone-200 text-bone-500"
                     )}>
-                      {meta.countKey} services →
+                      {getServicesByCategory(meta.slug as ServiceCategory).length} services →
                     </p>
                   </div>
                 </Link>
+                </Tilt>
               </StaggerItem>
             );
           })}

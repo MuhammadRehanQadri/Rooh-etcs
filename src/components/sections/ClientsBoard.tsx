@@ -1,56 +1,42 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { clients, clientGroups } from "@/content/clients";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { sectors } from "@/content/clients";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { Tilt } from "@/components/motion/Tilt";
+import { Landmark, Factory, Building2, Store } from "lucide-react";
+
+const ICONS = { Landmark, Factory, Building2, Store } as const;
 
 export function ClientsBoard() {
-  const t = useTranslations("pages.clients");
-
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="container-wide">
-        <Tabs defaultValue="all">
-          <TabsList className="mb-12 flex-wrap">
-            <TabsTrigger value="all">{t("tabsAll")}</TabsTrigger>
-            {clientGroups.map((g) => (
-              <TabsTrigger key={g} value={g}>
-                {t(
-                  `tabs${g.charAt(0).toUpperCase()}${g.slice(1)}` as never
-                )}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          <TabsContent value="all">
-            <ClientGrid items={clients} />
-          </TabsContent>
-          {clientGroups.map((g) => (
-            <TabsContent key={g} value={g}>
-              <ClientGrid items={clients.filter((c) => c.group === g)} />
-            </TabsContent>
-          ))}
-        </Tabs>
+        <StaggerGroup className="grid gap-5 sm:grid-cols-2">
+          {sectors.map((s) => {
+            const Icon = ICONS[s.icon as keyof typeof ICONS];
+            return (
+              <StaggerItem key={s.key}>
+                <Tilt className="h-full">
+                  <article className="group relative h-full overflow-hidden rounded-2xl border border-bone-200 bg-bone-50 p-8 transition-all duration-500 hover:bg-white hover:border-gold-500/40 hover:shadow-[0_24px_60px_-30px_rgba(15,38,69,0.3)]">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold-500/[0.06] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="relative">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-navy-900 text-gold-500">
+                        {Icon && <Icon className="size-6" strokeWidth={1.5} />}
+                      </div>
+                      <h3 className="mt-7 font-display text-xl font-semibold text-navy-900 leading-tight">
+                        {s.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-bone-600 text-pretty">
+                        {s.description}
+                      </p>
+                    </div>
+                  </article>
+                </Tilt>
+              </StaggerItem>
+            );
+          })}
+        </StaggerGroup>
       </div>
     </section>
-  );
-}
-
-function ClientGrid({ items }: { items: typeof clients }) {
-  return (
-    <StaggerGroup
-      className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-      stagger={0.04}
-    >
-      {items.map((c) => (
-        <StaggerItem key={c.name}>
-          <div className="group flex h-20 items-center justify-center rounded-xl border border-bone-200 bg-bone-50 px-5 transition-all hover:border-gold-500/40 hover:bg-white hover:-translate-y-0.5">
-            <span className="text-sm font-medium text-navy-900 text-center leading-tight text-balance">
-              {c.name}
-            </span>
-          </div>
-        </StaggerItem>
-      ))}
-    </StaggerGroup>
   );
 }

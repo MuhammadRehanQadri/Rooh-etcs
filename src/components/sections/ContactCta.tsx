@@ -11,8 +11,8 @@ import { MessageCircleIcon, ArrowRightIcon } from "lucide-react";
 export function ContactCta() {
   const t = useTranslations("contactCta");
   return (
-    <section className="relative isolate overflow-hidden bg-navy-900 text-white py-28 lg:py-36">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,165,55,0.18),transparent_55%)]" />
+    <section className="aurora relative isolate overflow-hidden bg-navy-900 text-white py-28 lg:py-36">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,165,55,0.12),transparent_55%)]" />
       <GearWatermark
         className="absolute -bottom-40 -end-40 opacity-25 hidden md:block"
         size={620}

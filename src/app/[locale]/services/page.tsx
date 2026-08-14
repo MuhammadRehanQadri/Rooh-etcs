@@ -7,6 +7,14 @@ import { ContactCta } from "@/components/sections/ContactCta";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import { ArrowUpRightIcon } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  breadcrumbSchema,
+  graph,
+  itemListSchema,
+  pageMetadata,
+  webPageSchema,
+} from "@/lib/seo";
 
 const categoryOrder: ServiceCategory[] = ["industrial", "construction", "engineering", "supply"];
 
@@ -17,7 +25,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.services" });
-  return { title: t("title") };
+  return pageMetadata({
+    locale,
+    path: "/services",
+    title: t("metaTitle"),
+    description: t("description"),
+    keywords: services.map((s) => s.title),
+  });
 }
 
 export default async function ServicesPage({
@@ -29,9 +43,37 @@ export default async function ServicesPage({
   setRequestLocale(locale);
   const t = await getTranslations("pages.services");
   const tCat = await getTranslations("categories");
+  const tNav = await getTranslations("nav");
+
+  const jsonLd = graph(
+    webPageSchema({
+      locale,
+      path: "/services",
+      name: t("title"),
+      description: t("description"),
+      type: "CollectionPage",
+      hasBreadcrumb: true,
+    }),
+    breadcrumbSchema(locale, [
+      { name: tNav("home"), path: "" },
+      { name: tNav("services"), path: "/services" },
+    ]),
+    itemListSchema(
+      locale,
+      "/services",
+      t("title"),
+      services.map((s) => ({
+        name: s.title,
+        path: `/services/${s.slug}`,
+        description: s.shortDescription,
+        image: s.heroImage,
+      }))
+    )
+  );
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <PageHero eyebrow={t("eyebrow")} title={t("title")} lead={t("lead")} />
       <div className="bg-white">
         {categoryOrder.map((cat) => {

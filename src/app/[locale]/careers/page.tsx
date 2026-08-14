@@ -3,10 +3,19 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { careerRoles } from "@/content/careers";
+import { SITE } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
-import { MapPinIcon, BriefcaseIcon, ArrowRightIcon } from "lucide-react";
+import { MapPinIcon, BriefcaseIcon, ArrowRightIcon, MailIcon } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  breadcrumbSchema,
+  graph,
+  jobPostingSchemas,
+  pageMetadata,
+  webPageSchema,
+} from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -15,7 +24,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.careers" });
-  return { title: t("title") };
+  return pageMetadata({
+    locale,
+    path: "/careers",
+    title: t("metaTitle"),
+    description: t("description"),
+  });
 }
 
 export default async function CareersPage({
@@ -26,9 +40,27 @@ export default async function CareersPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("pages.careers");
+  const tNav = await getTranslations("nav");
+
+  const jsonLd = graph(
+    webPageSchema({
+      locale,
+      path: "/careers",
+      name: t("title"),
+      description: t("description"),
+      type: "CollectionPage",
+      hasBreadcrumb: true,
+    }),
+    breadcrumbSchema(locale, [
+      { name: tNav("home"), path: "" },
+      { name: tNav("careers"), path: "/careers" },
+    ]),
+    ...jobPostingSchemas(locale, careerRoles)
+  );
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <PageHero eyebrow={t("eyebrow")} title={t("title")} lead={t("lead")} />
 
       <section className="bg-white py-24 lg:py-32">
@@ -52,7 +84,18 @@ export default async function CareersPage({
           <div className="lg:col-span-8">
             {careerRoles.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-bone-300 p-12 text-center">
-                <p className="text-sm text-bone-600">{t("noRoles")}</p>
+                <p className="text-sm text-bone-600 mb-6 max-w-md mx-auto">{t("noRoles")}</p>
+                <Button asChild variant="primary" size="lg">
+                  <a
+                    href={`mailto:${SITE.careersEmail}?subject=${encodeURIComponent(
+                      "Speculative application — ETCS"
+                    )}`}
+                  >
+                    <MailIcon className="size-4" />
+                    {t("speculativeCta")}
+                  </a>
+                </Button>
+                <p className="mt-4 text-xs text-bone-500" dir="ltr">{SITE.careersEmail}</p>
               </div>
             ) : (
               <StaggerGroup className="space-y-4">
@@ -93,7 +136,7 @@ export default async function CareersPage({
                           className="shrink-0"
                         >
                           <a
-                            href={`mailto:careers@etcs.sa?subject=${encodeURIComponent(
+                            href={`mailto:${SITE.careersEmail}?subject=${encodeURIComponent(
                               `Application — ${role.title}`
                             )}`}
                           >

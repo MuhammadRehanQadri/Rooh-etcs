@@ -15,6 +15,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ShieldCheckIcon, UsersIcon, AwardIcon } from "lucide-react";
 import { leadership } from "@/content/leadership";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, graph, pageMetadata, webPageSchema } from "@/lib/seo";
 
 const dots = [
   { id: "manifesto", label: "Manifesto" },
@@ -32,7 +34,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.about" });
-  return { title: t("title") };
+  return pageMetadata({
+    locale,
+    path: "/about",
+    title: t("metaTitle"),
+    description: t("description"),
+  });
 }
 
 export default async function AboutPage({
@@ -44,9 +51,26 @@ export default async function AboutPage({
   setRequestLocale(locale);
   const t = await getTranslations("pages.about");
   const tAbout = await getTranslations("aboutPreview");
+  const tNav = await getTranslations("nav");
+
+  const jsonLd = graph(
+    webPageSchema({
+      locale,
+      path: "/about",
+      name: t("title"),
+      description: t("description"),
+      type: "AboutPage",
+      hasBreadcrumb: true,
+    }),
+    breadcrumbSchema(locale, [
+      { name: tNav("home"), path: "" },
+      { name: tNav("about"), path: "/about" },
+    ])
+  );
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <ReadingProgress />
       <SectionDots sections={dots} />
 
@@ -123,8 +147,8 @@ export default async function AboutPage({
             <Reveal delay={0.15}>
               <div className="mt-10 grid gap-6 sm:grid-cols-3">
                 <Stat title="ISO 9001 · 14001 · 45001" detail="Certified management systems" icon={ShieldCheckIcon} />
-                <Stat title="450+" detail="Skilled workforce on demand" icon={UsersIcon} />
-                <Stat title="15+ years" detail="Operating across the Kingdom" icon={AwardIcon} />
+                <Stat title="Multi-discipline" detail="Industrial, construction & engineering" icon={UsersIcon} />
+                <Stat title="Al Jubail, KSA" detail="Serving the Kingdom" icon={AwardIcon} />
               </div>
             </Reveal>
           </div>
@@ -203,16 +227,23 @@ export default async function AboutPage({
           </Reveal>
           <Reveal delay={0.05}>
             <div className="h-full rounded-2xl border border-bone-200 bg-white p-8 flex flex-col">
-              <Badge variant="eyebrow">Numbers</Badge>
+              <Badge variant="eyebrow">Our commitment</Badge>
               <h3 className="mt-4 font-display text-2xl lg:text-3xl font-semibold text-navy-900 leading-tight">
-                Last twelve months
+                Built on principle
               </h3>
-              <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 flex-1">
-                <NumberStat value="2.1M" label="Safe man-hours" />
-                <NumberStat value="0" label="Lost-time incidents" />
-                <NumberStat value="98%" label="Schedule adherence" />
-                <NumberStat value="99.7%" label="Quality acceptance" />
-              </dl>
+              <ul className="mt-8 grid gap-4 flex-1">
+                {[
+                  "Driven by Safety Excellence",
+                  "Committed to Zero-Harm Principles",
+                  "Focused on Operational Reliability",
+                  "Built on Quality Standards",
+                ].map((c) => (
+                  <li key={c} className="flex items-start gap-3">
+                    <ShieldCheckIcon className="size-5 mt-0.5 text-gold-600 shrink-0" />
+                    <span className="text-base font-medium text-navy-900 leading-snug">{c}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         </div>
@@ -242,32 +273,29 @@ export default async function AboutPage({
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-balance">
-                Aligned with the Kingdom&apos;s industrial transformation.
+                Partnering in the Kingdom&apos;s industrial transformation.
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 max-w-2xl text-base lg:text-lg leading-relaxed text-white/70">
-                Localisation, sustainability and operational excellence sit at the heart of
-                Saudi Vision 2030. ETCS is committed to contributing — through Saudization of
-                skilled trades, investment in renewable-energy capability, and disciplined
-                delivery of nationally significant infrastructure.
+                ETCS is aligned with Saudi Vision 2030 through a commitment to sustainable
+                development, local talent empowerment, and the delivery of high-quality
+                industrial and infrastructure solutions across the Kingdom.
               </p>
             </Reveal>
           </div>
           <div className="lg:col-span-5">
             <StaggerGroup className="grid grid-cols-2 gap-4">
-              <StaggerItem>
-                <V2030 value="34%" label="Saudization rate" />
-              </StaggerItem>
-              <StaggerItem>
-                <V2030 value="12" label="Solar projects in pipeline" />
-              </StaggerItem>
-              <StaggerItem>
-                <V2030 value="6" label="Major operators served" />
-              </StaggerItem>
-              <StaggerItem>
-                <V2030 value="0" label="Compliance incidents" />
-              </StaggerItem>
+              {[
+                "Saudi Talent Development",
+                "Renewable Energy Focus",
+                "Industry-Ready Solutions",
+                "Commitment to HSE Standards",
+              ].map((c) => (
+                <StaggerItem key={c}>
+                  <V2030 label={c} />
+                </StaggerItem>
+              ))}
             </StaggerGroup>
           </div>
         </div>
@@ -307,24 +335,13 @@ function Stat({
   );
 }
 
-function NumberStat({ value, label }: { value: string; label: string }) {
+function V2030({ label }: { label: string }) {
   return (
-    <div>
-      <dt className="font-display text-3xl lg:text-4xl font-semibold text-navy-900 tabular-nums">
-        {value}
-      </dt>
-      <dd className="mt-2 text-[11px] uppercase tracking-[0.18em] text-bone-500">{label}</dd>
-    </div>
-  );
-}
-
-function V2030({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
-      <p className="font-display text-3xl lg:text-4xl font-semibold text-white tabular-nums">
-        {value}
+    <div className="h-full rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
+      <span className="block size-2 rounded-full bg-gold-500 mb-4" />
+      <p className="font-display text-base lg:text-lg font-semibold text-white leading-snug text-balance">
+        {label}
       </p>
-      <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-gold-400">{label}</p>
     </div>
   );
 }

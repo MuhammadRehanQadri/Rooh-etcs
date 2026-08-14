@@ -14,6 +14,15 @@ import {
   ClockIcon,
   MessageCircleIcon,
 } from "lucide-react";
+import { Faq, getFaqItems } from "@/components/sections/Faq";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  breadcrumbSchema,
+  faqSchema,
+  graph,
+  pageMetadata,
+  webPageSchema,
+} from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -22,7 +31,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.contact" });
-  return { title: t("title") };
+  return pageMetadata({
+    locale,
+    path: "/contact",
+    title: t("metaTitle"),
+    description: t("description"),
+  });
 }
 
 export default async function ContactPage({
@@ -33,9 +47,27 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("pages.contact");
+  const tNav = await getTranslations("nav");
+
+  const jsonLd = graph(
+    webPageSchema({
+      locale,
+      path: "/contact",
+      name: t("title"),
+      description: t("description"),
+      type: "ContactPage",
+      hasBreadcrumb: true,
+    }),
+    breadcrumbSchema(locale, [
+      { name: tNav("home"), path: "" },
+      { name: tNav("contact"), path: "/contact" },
+    ]),
+    faqSchema(locale, "/contact", await getFaqItems(locale))
+  );
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <Toaster richColors position="top-center" closeButton />
       <PageHero eyebrow={t("eyebrow")} title={t("title")} lead={t("lead")} />
 
@@ -74,22 +106,35 @@ export default async function ContactPage({
                   </li>
                   <li className="flex items-start gap-3">
                     <PhoneIcon className="size-4 mt-0.5 text-gold-500 shrink-0" />
-                    <a
-                      href={`tel:${SITE.phone}`}
-                      dir="ltr"
-                      className="hover:text-gold-400 transition"
-                    >
-                      {SITE.phoneDisplay}
-                    </a>
+                    <span className="flex flex-col gap-1">
+                      <a href={`tel:${SITE.phone}`} dir="ltr" className="hover:text-gold-400 transition">
+                        {SITE.phoneDisplay}
+                      </a>
+                      {SITE.phonesExtra.map((p) => (
+                        <a
+                          key={p}
+                          href={`tel:${p.replace(/[\s-]/g, "")}`}
+                          dir="ltr"
+                          className="text-white/60 hover:text-gold-400 transition"
+                        >
+                          {p}
+                        </a>
+                      ))}
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <MailIcon className="size-4 mt-0.5 text-gold-500 shrink-0" />
-                    <a
-                      href={`mailto:${SITE.email}`}
-                      className="hover:text-gold-400 transition"
-                    >
-                      {SITE.email}
-                    </a>
+                    <span className="flex flex-col gap-1">
+                      <a href={`mailto:${SITE.emails.info}`} className="hover:text-gold-400 transition">
+                        {SITE.emails.info}
+                      </a>
+                      <a href={`mailto:${SITE.emails.sales}`} className="text-white/60 hover:text-gold-400 transition">
+                        {SITE.emails.sales}
+                      </a>
+                      <a href={`mailto:${SITE.emails.inquiry}`} className="text-white/60 hover:text-gold-400 transition">
+                        {SITE.emails.inquiry}
+                      </a>
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <ClockIcon className="size-4 mt-0.5 text-gold-500 shrink-0" />
@@ -116,8 +161,8 @@ export default async function ContactPage({
             <Reveal delay={0.05}>
               <div className="overflow-hidden rounded-2xl border border-bone-200">
                 <iframe
-                  title="ETCS location"
-                  src="https://maps.google.com/maps?q=Saudi+Arabia&t=&z=5&ie=UTF8&iwloc=&output=embed"
+                  title="ETCS location — Al Jubail"
+                  src="https://maps.google.com/maps?q=Al+Jubail+Dana+District+Saudi+Arabia&t=&z=11&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="280"
                   style={{ border: 0 }}
@@ -129,6 +174,8 @@ export default async function ContactPage({
           </aside>
         </div>
       </section>
+
+      <Faq locale={locale} />
     </>
   );
 }

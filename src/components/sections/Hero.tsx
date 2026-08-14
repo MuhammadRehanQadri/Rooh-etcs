@@ -9,10 +9,12 @@ import { GearWatermark } from "@/components/motion/GearWatermark";
 import { CountUp } from "@/components/motion/CountUp";
 import { CursorSpotlight } from "@/components/motion/CursorSpotlight";
 import { Magnetic } from "@/components/motion/MagneticButton";
-import { HeroSlideshow } from "./HeroSlideshow";
+import { HeroVisual } from "./HeroVisual";
 import { motion } from "motion/react";
-import { ArrowRightIcon, DownloadIcon } from "lucide-react";
+import { ArrowRightIcon, DownloadIcon, Layers, Award, Handshake, Users } from "lucide-react";
 import { heroStats } from "@/content/stats";
+
+const STAT_ICONS = { Layers, Award, Handshake, Users } as const;
 
 export function Hero() {
   const t = useTranslations();
@@ -86,16 +88,24 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 1.25, ease: [0.22, 1, 0.36, 1] }}
               className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 border-t border-white/10 pt-8"
             >
-              {heroStats.map((s) => (
-                <div key={s.key}>
-                  <p className="font-display text-3xl sm:text-4xl font-semibold text-white">
-                    <CountUp to={Number(t(s.valueKey as never))} suffix={s.suffix} />
-                  </p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/55">
-                    {t(s.labelKey as never)}
-                  </p>
-                </div>
-              ))}
+              {heroStats.map((s) => {
+                const Icon = STAT_ICONS[s.icon as keyof typeof STAT_ICONS];
+                return (
+                  <div key={s.key}>
+                    {Icon && (
+                      <Icon className="size-5 text-gold-500 mb-3" strokeWidth={1.5} />
+                    )}
+                    {s.value ? (
+                      <p className="font-display text-3xl sm:text-4xl font-semibold text-white leading-none">
+                        <CountUp to={Number(s.value.replace(/\D/g, ""))} suffix="+" />
+                      </p>
+                    ) : null}
+                    <p className="mt-1 text-[13px] font-medium leading-snug text-white/85 text-balance">
+                      {t(s.labelKey as never)}
+                    </p>
+                  </div>
+                );
+              })}
             </motion.div>
           </div>
 
@@ -106,7 +116,7 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <HeroSlideshow />
+              <HeroVisual />
             </motion.div>
             <GearWatermark
               className="absolute -bottom-16 -end-16 opacity-40 z-0"

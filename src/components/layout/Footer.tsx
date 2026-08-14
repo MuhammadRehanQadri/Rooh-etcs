@@ -4,7 +4,8 @@ import { SITE, whatsappLink } from "@/lib/utils";
 import { Logo } from "./Logo";
 import { services } from "@/content/services";
 import { MailIcon, PhoneIcon, MapPinIcon } from "lucide-react";
-import { LinkedinIcon, TwitterIcon, InstagramIcon, FacebookIcon } from "@/components/layout/SocialIcons";
+// Social icons hidden until the client provides live social URLs (Rev 01).
+// import { LinkedinIcon, TwitterIcon, InstagramIcon, FacebookIcon } from "@/components/layout/SocialIcons";
 
 export function Footer() {
   const t = useTranslations();
@@ -49,7 +50,7 @@ export function Footer() {
             </h4>
             <ul className="space-y-3 text-sm">
               <li><Link href="/about" className="hover:text-gold-400 transition">{tNav("about")}</Link></li>
-              <li><Link href="/projects/ongoing" className="hover:text-gold-400 transition">{tNav("projects")}</Link></li>
+              <li><Link href="/projects" className="hover:text-gold-400 transition">{tNav("projects")}</Link></li>
               <li><Link href="/clients" className="hover:text-gold-400 transition">{tNav("clients")}</Link></li>
               <li><Link href="/vendor-approvals" className="hover:text-gold-400 transition">{tNav("vendorApprovals")}</Link></li>
               <li><Link href="/careers" className="hover:text-gold-400 transition">{tNav("careers")}</Link></li>
@@ -92,23 +93,36 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <PhoneIcon className="size-4 mt-0.5 text-gold-500 shrink-0" />
-                <a href={`tel:${SITE.phone}`} className="hover:text-gold-400 transition" dir="ltr">
-                  {SITE.phoneDisplay}
-                </a>
+                <span className="flex flex-col gap-1">
+                  <a href={`tel:${SITE.phone}`} className="hover:text-gold-400 transition" dir="ltr">
+                    {SITE.phoneDisplay}
+                  </a>
+                  {SITE.phonesExtra.map((p) => (
+                    <a
+                      key={p}
+                      href={`tel:${p.replace(/[\s-]/g, "")}`}
+                      className="text-white/55 hover:text-gold-400 transition"
+                      dir="ltr"
+                    >
+                      {p}
+                    </a>
+                  ))}
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <MailIcon className="size-4 mt-0.5 text-gold-500 shrink-0" />
-                <a href={`mailto:${SITE.email}`} className="hover:text-gold-400 transition">
-                  {SITE.email}
-                </a>
+                <span className="flex flex-col gap-1">
+                  <a href={`mailto:${SITE.emails.info}`} className="hover:text-gold-400 transition">
+                    {SITE.emails.info}
+                  </a>
+                  <a href={`mailto:${SITE.emails.sales}`} className="text-white/55 hover:text-gold-400 transition">
+                    {SITE.emails.sales}
+                  </a>
+                </span>
               </li>
             </ul>
             <div className="mt-6 flex items-center gap-2">
-              <a href={SITE.social.linkedin} aria-label="LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-gold-400 hover:border-gold-500/30 transition cursor-pointer"><LinkedinIcon className="size-4" /></a>
-              <a href={SITE.social.twitter} aria-label="X" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-gold-400 hover:border-gold-500/30 transition cursor-pointer"><TwitterIcon className="size-4" /></a>
-              <a href={SITE.social.instagram} aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-gold-400 hover:border-gold-500/30 transition cursor-pointer"><InstagramIcon className="size-4" /></a>
-              <a href={SITE.social.facebook} aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-gold-400 hover:border-gold-500/30 transition cursor-pointer"><FacebookIcon className="size-4" /></a>
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="ms-1 inline-flex h-9 px-3 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 transition text-xs font-medium cursor-pointer">WhatsApp</a>
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="inline-flex h-9 px-4 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 transition text-xs font-medium cursor-pointer">WhatsApp</a>
             </div>
           </div>
         </div>
