@@ -1,87 +1,126 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { work, type WorkItem } from "@/content/projects";
+import { work } from "@/content/projects";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
-import { Tilt } from "@/components/motion/Tilt";
-import { SectionHeading } from "./SectionHeading";
-import { ArrowUpRightIcon } from "lucide-react";
+import { useTier } from "@/lib/use-tier";
+import { cn } from "@/lib/utils";
 
-/** Homepage "Our Work" strip — first 5 disciplines from the work gallery. */
-const featured = work.slice(0, 5);
+const GAP = 22;
 
 export function ProjectShowcase() {
   const t = useTranslations();
+  const tier = useTier();
+  const visible = tier === "wide" ? 3 : tier === "mid" ? 2 : 1;
+  const maxIndex = Math.max(0, work.length - visible);
+  const [index, setIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    setIndex((i) => Math.min(i, maxIndex));
+  }, [maxIndex]);
+
+  const cardBasis = `calc((100% - ${(visible - 1) * GAP}px)/${visible})`;
+  const shift = index === 0 ? "none" : `translateX(calc(-1 * ${index} * (${cardBasis} + ${GAP}px)))`;
 
   return (
-    <section className="bg-bone-50 py-24 lg:py-32">
+    <section className="flex justify-center py-20 lg:py-[120px] border-b border-bp-ink/16 bg-bp-paper">
       <div className="container-wide">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
-          <SectionHeading
-            eyebrow={t("projectsPreview.eyebrow")}
-            title={t("projectsPreview.headline")}
-            description={t("projectsPreview.subheadline")}
-          />
+        <div className="flex justify-between items-end gap-12 flex-wrap mb-[52px]">
+          <div className="max-w-[700px]">
+            <div className="font-bp-mono text-[10.5px] tracking-[0.16em] text-bp-brick mb-4 uppercase">
+              SEC. 04 / {t("projectsPreview.eyebrow")}
+            </div>
+            <h2 className="font-bp-display font-semibold text-[clamp(2.1rem,4vw,3.4rem)] leading-[1.04] tracking-[-0.015em] text-bp-ink mb-4">
+              {t("projectsPreview.headline")}
+            </h2>
+            <p className="text-[17px] leading-[1.66] font-bp-sans font-light text-bp-body">
+              {t("projectsPreview.subheadline")}
+            </p>
+          </div>
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-navy-900 gold-underline self-start lg:self-end"
+            className="inline-flex items-center gap-2.5 font-bp-display font-semibold text-[14.5px] tracking-[0.06em] uppercase text-bp-ink border-b-2 border-bp-brick pb-1.5 whitespace-nowrap transition-colors hover:text-bp-brick"
           >
-            {t("projectsPreview.viewAll")} →
+            {t("projectsPreview.viewAll")} <span>→</span>
           </Link>
         </div>
 
-        <StaggerGroup className="grid gap-6 lg:grid-cols-12">
-          {featured.map((item, idx) => (
-            <StaggerItem
-              key={item.slug}
-              className={
-                idx === 0
-                  ? "lg:col-span-7"
-                  : idx === 1
-                  ? "lg:col-span-5"
-                  : "lg:col-span-4"
-              }
+        <div className="flex justify-between items-center gap-5 mb-6">
+          <div className="flex items-center gap-3.5 font-bp-mono text-[10px] tracking-[0.14em] text-bp-meta">
+            <span className="text-bp-ink">{String(index + 1).padStart(2, "0")}</span>
+            <span className="block w-[74px] h-px bg-bp-ink/22" />
+            <span>{String(work.length).padStart(2, "0")}</span>
+          </div>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setIndex((i) => Math.max(0, i - 1))}
+              disabled={index === 0}
+              aria-label="Previous"
+              className={cn(
+                "w-[46px] h-[46px] border font-bp-mono text-[15px] transition-colors",
+                index === 0
+                  ? "border-bp-ink/18 text-bp-ink/28 cursor-not-allowed"
+                  : "border-bp-ink/50 text-bp-ink cursor-pointer hover:bg-bp-ink/5"
+              )}
             >
-              <WorkCard item={item} big={idx === 0} />
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
+              ←
+            </button>
+            <button
+              type="button"
+              onClick={() => setIndex((i) => Math.min(maxIndex, i + 1))}
+              disabled={index === maxIndex}
+              aria-label="Next"
+              className={cn(
+                "w-[46px] h-[46px] border font-bp-mono text-[15px] transition-colors",
+                index === maxIndex
+                  ? "border-bp-ink/18 text-bp-ink/28 cursor-not-allowed"
+                  : "border-bp-ink/50 text-bp-ink cursor-pointer hover:bg-bp-ink/5"
+              )}
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        <div className="overflow-hidden">
+          <StaggerGroup
+            className="flex gap-[22px] transition-transform duration-[800ms] ease-[cubic-bezier(.22,.68,.28,1)]"
+            style={{ transform: shift }}
+          >
+            {work.map((item) => (
+              <StaggerItem key={item.slug} style={{ flex: `0 0 ${cardBasis}` }}>
+                <Link
+                  href={`/services/${item.service ?? ""}` as never}
+                  className="group block h-full bg-white/55 border border-bp-ink/16 p-3.5 text-bp-ink transition-colors hover:border-bp-brick hover:bg-white"
+                >
+                  <div className="relative aspect-[5/4] overflow-hidden mb-4.5">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width:1024px) 33vw, 100vw"
+                      className="object-cover [filter:saturate(.72)]"
+                    />
+                  </div>
+                  <div className="flex justify-between items-center font-bp-mono text-[9.5px] tracking-[0.14em] mb-3.5">
+                    <span className="text-bp-brick uppercase">{t(`categories.${item.category}` as never)}</span>
+                  </div>
+                  <h3 className="font-bp-display font-semibold text-lg leading-[1.2] mb-4 min-h-[44px]">
+                    {item.title}
+                  </h3>
+                  <p className="text-[13.5px] leading-[1.55] font-bp-sans font-light text-bp-muted pt-3 border-t border-bp-ink/14">
+                    {item.blurb}
+                  </p>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </div>
       </div>
     </section>
-  );
-}
-
-function WorkCard({ item, big }: { item: WorkItem; big: boolean }) {
-  return (
-    <Tilt className="h-full">
-      <Link
-        href={`/services/${item.service ?? ""}` as never}
-        className="group relative block h-full overflow-hidden rounded-2xl bg-navy-900 ring-1 ring-bone-200"
-      >
-        <div className={`relative ${big ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
-          <Image
-            src={item.image}
-            alt={item.title}
-            fill
-            sizes="(min-width:1024px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-900/40 to-transparent" />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 text-white">
-          <h3 className="text-balance text-xl sm:text-2xl font-semibold leading-tight">
-            {item.title}
-          </h3>
-          <p className="mt-3 max-w-md text-sm text-white/65 leading-relaxed line-clamp-2">
-            {item.blurb}
-          </p>
-        </div>
-        <div className="absolute top-5 end-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white/80 transition group-hover:bg-gold-500 group-hover:text-navy-900">
-          <ArrowUpRightIcon className="size-4 rtl:rotate-90" />
-        </div>
-      </Link>
-    </Tilt>
   );
 }

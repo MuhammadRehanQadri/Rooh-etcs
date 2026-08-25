@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Sora, Inter, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Sora, Inter, IBM_Plex_Sans_Arabic, Chakra_Petch, Work_Sans, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale, getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -29,6 +29,26 @@ const arabic = IBM_Plex_Sans_Arabic({
   variable: "--font-arabic",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
+});
+// "Blueprint" theme faces — Header/Footer/Home. Chakra Petch has no Arabic
+// glyphs; the Arabic locale keeps IBM Plex Sans Arabic for headings there.
+const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  variable: "--font-chakra-petch",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600"],
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export function generateStaticParams() {
@@ -126,7 +146,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${sora.variable} ${inter.variable} ${arabic.variable}`}
+      className={`${sora.variable} ${inter.variable} ${arabic.variable} ${chakraPetch.variable} ${workSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen bg-white antialiased">
         <JsonLd data={siteGraph} />

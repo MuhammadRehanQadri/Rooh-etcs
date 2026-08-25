@@ -10,12 +10,13 @@ import {
 } from "@/lib/seo";
 import { services } from "@/content/services";
 import { Hero } from "@/components/sections/Hero";
+import { StatsStrip } from "@/components/sections/StatsStrip";
 import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { AboutPreview } from "@/components/sections/AboutPreview";
-import { ServiceCategoryGrid } from "@/components/sections/ServiceCategoryGrid";
+import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { ProcessBand } from "@/components/sections/ProcessBand";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
-import { ClientMarquee } from "@/components/sections/ClientMarquee";
+import { TrustedBySectors } from "@/components/sections/TrustedBySectors";
 import { VisionMission } from "@/components/sections/VisionMission";
 import { VendorApprovals } from "@/components/sections/VendorApprovals";
 import { ContactCta } from "@/components/sections/ContactCta";
@@ -68,20 +69,18 @@ export default async function HomePage({
     <>
       <JsonLd data={jsonLd} />
       <Toaster richColors position="top-center" closeButton />
-      <Hero />
-      <CapabilityMarquee />
-      <AboutPreview />
-      <ServiceCategoryGrid />
-      <ProcessBand />
-      <ProjectShowcase />
-      <ClientMarquee />
-      <section className="bg-navy-900 text-white relative isolate overflow-hidden py-24 lg:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,165,55,0.18),transparent_55%)]" />
-        <div className="relative container-wide">
-          <VisionMission embedded />
-        </div>
-      </section>
-      <VendorApprovals />
+      <div className="bp-grid">
+        <Hero />
+        <StatsStrip />
+        <CapabilityMarquee />
+        <AboutPreview />
+        <WhatWeDo />
+        <ProcessBand />
+        <ProjectShowcase />
+        <VisionMission />
+        <TrustedBySectors />
+        <VendorApprovals />
+      </div>
       <ContactCta />
     </>
   );

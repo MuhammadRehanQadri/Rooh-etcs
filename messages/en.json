@@ -85,8 +85,8 @@
   },
   "vendorApprovalsPreview": {
     "eyebrow": "Approvals & Certifications",
-    "headline": "Certified systems, operator pre-qualification underway",
-    "subheadline": "ETCS holds ISO 9001, 14001 and 45001 certification and is actively pursuing pre-qualification with leading operators in the Kingdom.",
+    "headline": "Certified systems, registered with Saudi Aramco",
+    "subheadline": "ETCS holds ISO 9001, 14001 and 45001 certification and is a registered supplier in the Saudi Aramco Supplier Management System. Pre-qualification with other operators in the Kingdom is underway.",
     "cta": "See details"
   },
   "contactCta": {
@@ -152,10 +152,10 @@
     },
     "vendorApprovals": {
       "eyebrow": "Approvals & Certifications",
-      "title": "Certified and progressing toward operator pre-qualification",
+      "title": "ISO certified and a registered Saudi Aramco supplier",
       "metaTitle": "ISO Certifications & Vendor Approvals",
-      "lead": "ETCS holds ISO 9001, 14001 and 45001 certification and is actively pursuing vendor pre-qualification with leading operators in the Kingdom. Certificates are available on request.",
-      "description": "ETCS holds ISO 9001:2015, ISO 14001:2015 and ISO 45001:2018 certification and is progressing operator pre-qualification with major Saudi operators."
+      "lead": "ETCS holds ISO 9001, 14001 and 45001 certification and is registered in the Saudi Aramco Supplier Management System under vendor code 10120303. Pre-qualification with other Kingdom operators is underway. Certificates are available on request.",
+      "description": "ETCS holds ISO 9001:2015, ISO 14001:2015 and ISO 45001:2018 certification and is a registered Saudi Aramco supplier under vendor code 10120303."
     },
     "careers": {
       "eyebrow": "Careers",
@@ -203,7 +203,7 @@
         "q2": "What services does ETCS provide?",
         "a2": "ETCS works across four divisions: industrial services (coating and lining, insulation and cladding, refractory, fireproofing, passive fire protection, piping and fabrication, waste management), construction (civil construction, renovation and maintenance, operation and maintenance), engineering (electrical and instrumentation, mechanical works, pre-engineered buildings, solar energy, inspection) and supply (manpower, training, equipment rental, industrial materials).",
         "q3": "Is ETCS certified?",
-        "a3": "Yes. ETCS holds ISO 9001:2015 (Quality), ISO 14001:2015 (Environment) and ISO 45001:2018 (Occupational Health & Safety) certification, valid to 21 May 2029. Certificates are available on request. Vendor pre-qualification with major operators is currently in progress.",
+        "a3": "Yes. ETCS holds ISO 9001:2015 (Quality), ISO 14001:2015 (Environment) and ISO 45001:2018 (Occupational Health & Safety) certification, valid to 21 May 2029, and is registered in the Saudi Aramco Supplier Management System under vendor code 10120303. Certificates are available on request. Pre-qualification with other operators is currently in progress.",
         "q4": "Which sectors does ETCS work with?",
         "a4": "ETCS supports government, industrial, private and commercial clients — including oil and gas, refining and petrochemical, power, water, storage and terminals, and infrastructure projects.",
         "q5": "How do I request a quotation?",

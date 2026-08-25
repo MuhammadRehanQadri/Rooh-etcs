@@ -3,16 +3,9 @@
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
-import { GlobeIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function LocaleSwitcher({
-  className,
-  dark = false,
-}: {
-  className?: string;
-  dark?: boolean;
-}) {
+export function LocaleSwitcher({ className }: { className?: string }) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const router = useRouter();
@@ -20,6 +13,7 @@ export function LocaleSwitcher({
   const params = useParams();
 
   const next = locale === "en" ? "ar" : "en";
+  const label = next === "en" ? "English" : "العربية";
 
   function switchTo() {
     router.replace(
@@ -34,16 +28,9 @@ export function LocaleSwitcher({
       type="button"
       onClick={switchTo}
       aria-label={t("switchLanguage")}
-      className={cn(
-        "inline-flex items-center gap-2 h-11 px-4 rounded-full text-xs uppercase tracking-[0.18em] transition cursor-pointer",
-        dark
-          ? "border border-white/20 text-white hover:bg-white/5"
-          : "border border-white/20 text-white hover:bg-white/5",
-        className
-      )}
+      className={cn("cursor-pointer transition-colors", className)}
     >
-      <GlobeIcon className="size-4" />
-      <span>{next === "en" ? "EN" : "ع"}</span>
+      {label}
     </button>
   );
 }

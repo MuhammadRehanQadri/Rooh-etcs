@@ -46,11 +46,13 @@ export function Reveal({
 export function StaggerGroup({
   children,
   className,
+  style,
   stagger = 0.08,
   once = true,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   stagger?: number;
   once?: boolean;
 }) {
@@ -63,6 +65,7 @@ export function StaggerGroup({
   return (
     <motion.div
       className={className}
+      style={style}
       initial="hidden"
       whileInView="show"
       viewport={{ once, margin: "-80px" }}
@@ -76,10 +79,12 @@ export function StaggerGroup({
 export function StaggerItem({
   children,
   className,
+  style,
   y = 24,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   y?: number;
 }) {
   const shouldReduce = useReducedMotion();
@@ -92,7 +97,7 @@ export function StaggerItem({
     },
   };
   return (
-    <motion.div className={className} variants={variants}>
+    <motion.div className={className} style={style} variants={variants}>
       {children}
     </motion.div>
   );

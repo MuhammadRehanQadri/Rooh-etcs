@@ -19,19 +19,17 @@ const tokens = [
 
 export function CapabilityMarquee() {
   return (
-    <section className="bg-bone-50 border-y border-bone-200 py-10 overflow-hidden">
-      <Marquee speed={55}>
-        {tokens.map((t, i) => (
-          <span key={`${t}-${i}`} className="inline-flex items-center gap-12">
-            <span className="font-display text-3xl md:text-4xl font-medium uppercase tracking-tight text-navy-900/80 whitespace-nowrap">
-              {t}
+    <div className="bg-bp-ink py-4 overflow-hidden">
+      <Marquee speed={48}>
+        {tokens.map((tk, i) => (
+          <span key={`${tk}-${i}`} className="inline-flex items-center gap-6">
+            <span className="font-bp-mono text-xs tracking-[0.14em] uppercase text-bp-ondark-dim whitespace-nowrap">
+              {tk}
             </span>
-            <span className="text-gold-500 text-2xl" aria-hidden>
-              ✦
-            </span>
+            <span className="text-bp-brick" aria-hidden>+</span>
           </span>
         ))}
       </Marquee>
-    </section>
+    </div>
   );
 }

@@ -236,8 +236,8 @@ export function organizationSchema(locale: string) {
     logo: {
       "@type": "ImageObject",
       "@id": LOGO_ID,
-      url: `${BASE_URL}/images/logo/logo-3d.jpg`,
-      contentUrl: `${BASE_URL}/images/logo/logo-3d.jpg`,
+      url: `${BASE_URL}/images/logo/etcs-mark.png`,
+      contentUrl: `${BASE_URL}/images/logo/etcs-mark.png`,
       caption: SITE.name,
     },
     image: { "@id": LOGO_ID },

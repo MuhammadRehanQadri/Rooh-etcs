@@ -67,11 +67,11 @@ export default async function VendorApprovalsPage({
         <div className="container-wide grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <Badge variant="eyebrow">Operator pre-qualification</Badge>
+              <Badge variant="eyebrow">Operator registrations</Badge>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-4 mb-10 font-display text-3xl lg:text-4xl font-semibold text-navy-900 leading-tight">
-                Pre-qualification underway
+                Registered with Saudi Aramco, more underway
               </h2>
             </Reveal>
             <StaggerGroup className="grid gap-3 sm:grid-cols-2" stagger={0.05}>
@@ -83,10 +83,25 @@ export default async function VendorApprovalsPage({
                     </div>
                     <div>
                       <p className="text-sm font-medium text-navy-900">{v.name}</p>
-                      <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-gold-500/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold-700">
-                        <span className="size-1.5 rounded-full bg-gold-500 animate-pulse" />
-                        In progress
-                      </span>
+                      {v.detail && (
+                        <p className="mt-1 text-xs text-bone-600">{v.detail}</p>
+                      )}
+                      {v.status === "approved" ? (
+                        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-navy-900/5 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-navy-900">
+                          <span className="size-1.5 rounded-full bg-navy-900" />
+                          Registered
+                        </span>
+                      ) : (
+                        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-gold-500/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold-700">
+                          <span className="size-1.5 rounded-full bg-gold-500 animate-pulse" />
+                          In progress
+                        </span>
+                      )}
+                      {v.vendorCode && (
+                        <p className="mt-2 text-[11px] text-bone-500 tabular-nums">
+                          Vendor code {v.vendorCode}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </StaggerItem>

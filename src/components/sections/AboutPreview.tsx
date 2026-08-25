@@ -1,69 +1,60 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Reveal } from "@/components/motion/Reveal";
-import { Button } from "@/components/ui/button";
-import { ArrowRightIcon } from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { pillars } from "@/content/pillars";
 
 export function AboutPreview() {
   const t = useTranslations("aboutPreview");
 
   return (
-    <section className="bg-bone-50">
-      <div className="container-wide py-24 lg:py-32 grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
-        <div className="lg:col-span-5 relative">
-          <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-              <Image
-                src="/images/hero/hero-02.jpg"
-                alt="ETCS field crew"
-                fill
-                sizes="(min-width:1024px) 40vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="absolute -bottom-8 -end-6 hidden md:block bg-navy-900 text-white p-6 rounded-2xl max-w-[260px] shadow-2xl">
-              <p className="text-xs uppercase tracking-[0.22em] text-gold-400">
-                Vision 2030
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-white/85">
-                A proud contributor to the Kingdom&apos;s industrial transformation.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="lg:col-span-7">
-          <p className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-gold-600">
-            <span className="block h-px w-8 bg-current opacity-60" />
+    <section className="flex justify-center py-20 lg:py-[120px] border-b border-bp-ink/16 bg-bp-paper">
+      <div className="container-wide grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8 lg:gap-[60px] items-start">
+        <div className="lg:sticky lg:top-[120px]">
+          <div className="font-bp-mono text-[10.5px] tracking-[0.16em] text-bp-brick mb-2.5">SEC. 01</div>
+          <div className="font-bp-mono text-[10.5px] tracking-[0.16em] text-bp-meta pt-2.5 border-t border-bp-ink/20 uppercase">
             {t("eyebrow")}
-          </p>
-          <Reveal delay={0.05}>
-            <h2 className="mt-5 text-balance font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-tight text-navy-900">
+          </div>
+        </div>
+        <div>
+          <Reveal>
+            <h2 className="font-bp-display font-semibold text-[clamp(2.25rem,4.4vw,3.9rem)] leading-[1.02] tracking-[-0.015em] max-w-[22ch] text-bp-ink mb-11 text-pretty">
               {t("headline")}
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-6 text-base sm:text-lg leading-relaxed text-bone-700 text-pretty">
-              {t("body")}
-            </p>
-          </Reveal>
+          <div className="grid sm:grid-cols-2 gap-11 mb-[52px]">
+            <Reveal delay={0.05}>
+              <p className="text-[16.5px] leading-[1.72] font-bp-sans font-light text-bp-body">
+                {t("body")}
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-[16.5px] leading-[1.72] font-bp-sans font-light text-bp-body">
+                {t("body2")}
+              </p>
+            </Reveal>
+          </div>
+
+          <StaggerGroup className="grid sm:grid-cols-3 gap-px bg-bp-ink/16 border border-bp-ink/16 mb-11">
+            {pillars.map((p) => (
+              <StaggerItem key={p.key}>
+                <div className="bg-bp-paper h-full p-7">
+                  <div className="font-bp-mono text-[10px] tracking-[0.14em] text-bp-bronze mb-4">{p.number}</div>
+                  <h4 className="font-bp-display font-semibold text-[19px] text-bp-ink mb-2.5">{p.title}</h4>
+                  <p className="text-[14.5px] leading-[1.6] font-bp-sans font-light text-bp-muted">{p.description}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+
           <Reveal delay={0.15}>
-            <p className="mt-4 text-base sm:text-lg leading-relaxed text-bone-700 text-pretty">
-              {t("body2")}
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <Button asChild variant="outlineDark" size="lg" className="mt-10">
-              <Link href="/about">
-                {t("cta")}
-                <ArrowRightIcon className="size-4 rtl:rotate-180" />
-              </Link>
-            </Button>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2.5 font-bp-display font-semibold text-[15px] tracking-[0.06em] uppercase text-bp-ink border-b-2 border-bp-brick pb-1.5 transition-colors hover:text-bp-brick"
+            >
+              {t("cta")} <span>→</span>
+            </Link>
           </Reveal>
         </div>
       </div>
