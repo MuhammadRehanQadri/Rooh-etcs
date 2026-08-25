@@ -10,6 +10,8 @@ export const SITE = {
   legalName: "Expert Technical Contracting Services Company",
   shortName: "ETCS",
   tagline: "Where Vision Becomes Reality",
+  /** Saudi Commercial Registration number — from the CR certificate in public/documents/etcs-company-profile.pdf */
+  crNumber: "7054306282",
   url: "https://etcs-ksa.com",
   phone: "+966590517642",
   phoneDisplay: "+966 59 051 7642",

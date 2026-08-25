@@ -84,7 +84,7 @@ export function Header() {
                 {SITE.shortName}
               </span>
               <span className="font-bp-mono text-[8px] tracking-[0.14em] text-bp-meta leading-none whitespace-nowrap">
-                EST. KSA · CR 4030XXXXXX
+                EST. KSA · CR {SITE.crNumber}
               </span>
             </div>
           </Link>
